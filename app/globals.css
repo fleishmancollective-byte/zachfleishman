@@ -1,0 +1,290 @@
+@import "tailwindcss";
+
+/* ─── Zach Fleishman · Zero to Six · Light Theme ───
+   Inspired by freedomclub.com (clean/editorial) with
+   glassy fluid accents borrowed from the conetic build.   */
+:root {
+  --bg: #f7f5f1;
+  --bg-tint: #fbf9f6;
+  --surface: rgba(255, 255, 255, 0.72);
+  --surface-2: rgba(255, 255, 255, 0.55);
+  --border: rgba(17, 24, 39, 0.08);
+  --border-strong: rgba(17, 24, 39, 0.14);
+  --ink: #0b0d12;
+  --ink-soft: #2a2f3a;
+  --muted: #5b6470;
+  --muted-2: #8a93a0;
+  --accent: #0b0d12;        /* primary button = near black */
+  --accent-hover: #1a1f2b;
+  --gold: #c9a063;          /* editorial accent */
+  --peach: #f4cfa1;
+  --mint: #b8e0c4;
+  --sky: #a9c5f4;
+  --lilac: #cab6f0;
+  --r: 14px;
+  --r2: 12px;
+  --r3: 10px;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-muted-2: var(--muted-2);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-accent: var(--accent);
+  --color-gold: var(--gold);
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-playfair);
+}
+
+html, body {
+  background: var(--bg) !important;
+  color: var(--ink) !important;
+}
+body {
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Ambient page glows (fluid, pastel, behind content) ─── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 90% 55% at 15% -10%, rgba(202, 182, 240, 0.45) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 50% at 95% 10%, rgba(244, 207, 161, 0.42) 0%, transparent 60%),
+    radial-gradient(ellipse 95% 60% at 50% 105%, rgba(169, 197, 244, 0.35) 0%, transparent 65%),
+    radial-gradient(ellipse 70% 45% at 0% 75%, rgba(184, 224, 196, 0.3) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+  animation: drift 22s ease-in-out infinite alternate;
+}
+@keyframes drift {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  50%  { transform: translate3d(-1.5%, 1%, 0) scale(1.04); }
+  100% { transform: translate3d(1.5%, -1%, 0) scale(1.02); }
+}
+
+/* subtle paper grain */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(rgba(17, 24, 39, 0.035) 1px, transparent 1px);
+  background-size: 3px 3px;
+  opacity: 0.6;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Glass panels (light variants) ─── */
+.glass {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 20px 60px -20px rgba(17, 24, 39, 0.18),
+    0 0 0 1px rgba(255, 255, 255, 0.4) inset;
+}
+.glass-soft {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(14px) saturate(130%);
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+}
+.glass-nav {
+  background: rgba(247, 245, 241, 0.72);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border-bottom: 1px solid var(--border);
+}
+
+/* ─── Editorial serif display ─── */
+.display {
+  font-family: var(--font-playfair), 'Times New Roman', serif;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.02;
+}
+.display em {
+  font-style: italic;
+  color: var(--gold);
+  font-weight: 400;
+}
+
+/* ─── Button primitives ─── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--accent);
+  color: #fbf9f6;
+  border: 1px solid var(--accent);
+  border-radius: var(--r2);
+  padding: 14px 22px;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(.22,1,.36,1), box-shadow 0.25s, background 0.25s;
+  box-shadow: 0 10px 30px -10px rgba(11, 13, 18, 0.55), 0 1px 0 rgba(255,255,255,0.12) inset;
+  text-decoration: none;
+}
+.btn-primary:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 16px 40px -14px rgba(11, 13, 18, 0.6), 0 1px 0 rgba(255,255,255,0.2) inset;
+}
+.btn-primary:active { transform: translateY(0); }
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  color: var(--ink-soft);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r2);
+  padding: 12px 18px;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+.btn-ghost:hover {
+  background: var(--surface-2);
+  border-color: var(--ink-soft);
+}
+
+/* ─── Flowing gradient accent text ─── */
+@keyframes flow {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.flow-text {
+  background: linear-gradient(
+    110deg,
+    #0b0d12 0%,
+    #1a1f2b 25%,
+    #c9a063 50%,
+    #1a1f2b 75%,
+    #0b0d12 100%
+  );
+  background-size: 220% 220%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: flow 9s ease-in-out infinite;
+}
+
+/* ─── Orbs: fluid shapes behind hero ─── */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.55;
+  pointer-events: none;
+  animation: orb-float 14s ease-in-out infinite alternate;
+}
+@keyframes orb-float {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(4%, -3%) scale(1.08); }
+}
+
+/* ─── Entrance animations ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { opacity: 0; animation: fadeUp 1s cubic-bezier(.22,1,.36,1) forwards; }
+.fade-up.d1 { animation-delay: 0.1s; }
+.fade-up.d2 { animation-delay: 0.25s; }
+.fade-up.d3 { animation-delay: 0.4s; }
+.fade-up.d4 { animation-delay: 0.55s; }
+.fade-up.d5 { animation-delay: 0.7s; }
+
+/* Scroll-triggered fade */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.8s cubic-bezier(.22,1,.36,1), transform 0.8s cubic-bezier(.22,1,.36,1);
+}
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.stagger > *:nth-child(2) { transition-delay: 80ms; }
+.stagger > *:nth-child(3) { transition-delay: 160ms; }
+.stagger > *:nth-child(4) { transition-delay: 240ms; }
+.stagger > *:nth-child(5) { transition-delay: 320ms; }
+.stagger > *:nth-child(6) { transition-delay: 400ms; }
+
+/* ─── Hover lift for cards ─── */
+.lift {
+  transition: transform 0.35s cubic-bezier(.22,1,.36,1), box-shadow 0.35s cubic-bezier(.22,1,.36,1), border-color 0.35s;
+}
+.lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 70px -24px rgba(17, 24, 39, 0.22);
+  border-color: var(--border-strong);
+}
+
+/* ─── Video / VSL frame ─── */
+.vsl-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #0b0d12;
+  border: 1px solid var(--border-strong);
+  box-shadow:
+    0 40px 120px -30px rgba(17, 24, 39, 0.35),
+    0 1px 0 rgba(255, 255, 255, 0.9) inset;
+}
+.vsl-frame::before {
+  /* subtle gradient ring like a film screen */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 40%, transparent 50%, rgba(11,13,18,0.4) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ─── Play-button pulse for placeholder ─── */
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(251, 249, 246, 0.55); }
+  50%      { box-shadow: 0 0 0 22px rgba(251, 249, 246, 0); }
+}
+.play-pulse { animation: pulse 2.4s ease-out infinite; }
+
+/* ─── Divider & misc ─── */
+.hair { height: 1px; background: var(--border); }
+
+/* Marquee */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee {
+  display: flex;
+  animation: marquee 38s linear infinite;
+  width: max-content;
+}
+.marquee-mask {
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
