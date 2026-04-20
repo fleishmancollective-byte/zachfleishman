@@ -1,26 +1,57 @@
 @import "tailwindcss";
 
-/* ─── Zach Fleishman · Zero to Six · Light Theme ───
-   Inspired by freedomclub.com (clean/editorial) with
-   glassy fluid accents borrowed from the conetic build.   */
+/* ─── Zach Fleishman · Zero to Six · Cream editorial ───
+   The original white/glass/fluid aesthetic. Pastel drifting orbs,
+   white frosted glass, Playfair serif headlines. One accent color
+   (deep blue) carries italic em emphasis.
+*/
 :root {
-  --bg: #f7f5f1;
-  --bg-tint: #fbf9f6;
-  --surface: rgba(255, 255, 255, 0.72);
-  --surface-2: rgba(255, 255, 255, 0.55);
+  /* Base palette */
+  --bg: #f7f5f1;                         /* warm cream */
+  --bg-tint: #fbf9f6;                    /* off-white tint */
+  --surface: rgba(255, 255, 255, 0.72);  /* glass panel */
+  --surface-2: rgba(255, 255, 255, 0.55);/* lighter glass */
   --border: rgba(17, 24, 39, 0.08);
   --border-strong: rgba(17, 24, 39, 0.14);
-  --ink: #0b0d12;
+  --ink: #0b0d12;                        /* near-black body text */
   --ink-soft: #2a2f3a;
   --muted: #5b6470;
   --muted-2: #8a93a0;
-  --accent: #0b0d12;        /* primary button = near black */
+  --accent: #0b0d12;                     /* primary CTA = near-black */
   --accent-hover: #1a1f2b;
-  --gold: #c9a063;          /* editorial accent */
+
+  /* Editorial accent · swapped from gold to deep blue */
+  --blue: #305282;         /* Storm — italic em + secondary accents */
+  --blue-deep: #1e3a6e;    /* Deeper blue for hover / richer moments */
+
+  /* Pastel orb tints */
   --peach: #f4cfa1;
   --mint: #b8e0c4;
   --sky: #a9c5f4;
   --lilac: #cab6f0;
+
+  /* Legacy aliases so older component references still resolve cleanly */
+  --gold: var(--blue);       /* any lingering `var(--gold)` reads as blue now */
+  --ocean: var(--blue);
+  --cloud: var(--bg-tint);
+  --slate: var(--ink);
+  --jet: var(--ink);
+  --abyss: var(--ink);
+  --night: var(--bg);
+  --dusk: var(--blue);
+  --steel: var(--muted);
+  --pearl: var(--bg-tint);
+  --cream: var(--bg);
+  --haze: var(--bg-tint);
+  --mist: var(--muted);
+  --storm: var(--blue);
+  --deep: var(--ink);
+  --royal: var(--blue);
+  --cobalt: var(--blue);
+  --indigo: var(--blue);
+  --flare: var(--blue);
+  --halo: var(--bg-tint);
+
   --r: 14px;
   --r2: 12px;
   --r3: 10px;
@@ -34,25 +65,36 @@
   --color-border: var(--border);
   --color-border-strong: var(--border-strong);
   --color-accent: var(--accent);
-  --color-gold: var(--gold);
-  --font-sans: var(--font-inter);
-  --font-serif: var(--font-playfair);
+  --color-blue: var(--blue);
+  --color-peach: var(--peach);
+  --color-mint: var(--mint);
+  --color-sky: var(--sky);
+  --color-lilac: var(--lilac);
+  --font-sans: var(--font-grotesk);
+  --font-serif: var(--font-serif);
 }
 
 html, body {
   background: var(--bg) !important;
   color: var(--ink) !important;
+  /* Hard-block horizontal scroll across the app. Any absolute-positioned
+     orb or oversized element that leaks past the viewport edge will be
+     clipped instead of making the page pannable. */
+  overflow-x: hidden;
+  max-width: 100vw;
+  overscroll-behavior-x: none;
 }
 body {
-  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, sans-serif;
+  font-family: var(--font-grotesk), -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, sans-serif;
   font-size: 15px;
   line-height: 1.55;
-  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* iOS Safari: prevent rubber-band horizontal pull */
+  position: relative;
 }
 
-/* ─── Ambient page glows (fluid, pastel, behind content) ─── */
+/* ─── Ambient drifting pastel orbs (behind content) ─── */
 body::before {
   content: '';
   position: fixed;
@@ -72,7 +114,7 @@ body::before {
   100% { transform: translate3d(1.5%, -1%, 0) scale(1.02); }
 }
 
-/* subtle paper grain */
+/* ─── Subtle paper grain ─── */
 body::after {
   content: '';
   position: fixed;
@@ -85,7 +127,7 @@ body::after {
   z-index: 0;
 }
 
-/* ─── Glass panels (light variants) ─── */
+/* ─── Glass panels ─── */
 .glass {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -108,18 +150,32 @@ body::after {
   -webkit-backdrop-filter: blur(14px) saturate(160%);
   border-bottom: 1px solid var(--border);
 }
+/* Bright paper card is still available for Pricing + FinalCTA (these already
+   are white/cream on white/cream so they don't need variable shadowing here) */
+.glass-bright {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(22px) saturate(150%);
+  -webkit-backdrop-filter: blur(22px) saturate(150%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 1) inset,
+    0 30px 90px -20px rgba(17, 24, 39, 0.22);
+}
 
-/* ─── Editorial serif display ─── */
+/* ─── Editorial serif display headlines ─── */
 .display {
-  font-family: var(--font-playfair), 'Times New Roman', serif;
+  font-family: var(--font-serif), "Times New Roman", Georgia, serif;
   font-weight: 500;
   letter-spacing: -0.025em;
   line-height: 1.02;
 }
+/* Italic em inside display headlines uses the editorial blue accent.
+   Swap from gold → blue per user direction. */
 .display em {
+  font-family: var(--font-serif), "Times New Roman", Georgia, serif;
   font-style: italic;
-  color: var(--gold);
   font-weight: 400;
+  color: var(--blue);
 }
 
 /* ─── Button primitives ─── */
@@ -138,13 +194,13 @@ body::after {
   letter-spacing: -0.01em;
   cursor: pointer;
   transition: transform 0.25s cubic-bezier(.22,1,.36,1), box-shadow 0.25s, background 0.25s;
-  box-shadow: 0 10px 30px -10px rgba(11, 13, 18, 0.55), 0 1px 0 rgba(255,255,255,0.12) inset;
+  box-shadow: 0 10px 30px -10px rgba(11, 13, 18, 0.55), 0 1px 0 rgba(255, 255, 255, 0.12) inset;
   text-decoration: none;
 }
 .btn-primary:hover {
   background: var(--accent-hover);
   transform: translateY(-1px);
-  box-shadow: 0 16px 40px -14px rgba(11, 13, 18, 0.6), 0 1px 0 rgba(255,255,255,0.2) inset;
+  box-shadow: 0 16px 40px -14px rgba(11, 13, 18, 0.6), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
 }
 .btn-primary:active { transform: translateY(0); }
 
@@ -178,9 +234,9 @@ body::after {
   background: linear-gradient(
     110deg,
     #0b0d12 0%,
-    #1a1f2b 25%,
-    #c9a063 50%,
-    #1a1f2b 75%,
+    #2a2f3a 25%,
+    #305282 50%,
+    #2a2f3a 75%,
     #0b0d12 100%
   );
   background-size: 220% 220%;
@@ -190,7 +246,7 @@ body::after {
   animation: flow 9s ease-in-out infinite;
 }
 
-/* ─── Orbs: fluid shapes behind hero ─── */
+/* ─── Orbs (component-level, behind hero etc) ─── */
 .orb {
   position: absolute;
   border-radius: 50%;
@@ -216,7 +272,6 @@ body::after {
 .fade-up.d4 { animation-delay: 0.55s; }
 .fade-up.d5 { animation-delay: 0.7s; }
 
-/* Scroll-triggered fade */
 .animate-on-scroll {
   opacity: 0;
   transform: translateY(22px);
@@ -255,7 +310,6 @@ body::after {
     0 1px 0 rgba(255, 255, 255, 0.9) inset;
 }
 .vsl-frame::before {
-  /* subtle gradient ring like a film screen */
   content: '';
   position: absolute;
   inset: 0;
@@ -287,4 +341,14 @@ body::after {
 .marquee-mask {
   mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
   -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+/* ─── Form inputs on cream ─── */
+input[type="password"],
+input[type="text"],
+input[type="email"] {
+  color: var(--ink);
+}
+input::placeholder {
+  color: rgba(17, 24, 39, 0.4);
 }

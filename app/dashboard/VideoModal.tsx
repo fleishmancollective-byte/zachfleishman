@@ -34,7 +34,7 @@ export default function VideoModal({
   if (!video) return null;
 
   const embedUrl = video.wistiaId
-    ? `https://fast.wistia.net/embed/iframe/${video.wistiaId}?videoFoam=true&playerColor=0b0d12`
+    ? `https://fast.wistia.net/embed/iframe/${video.wistiaId}?videoFoam=true&playerColor=1a2b4a`
     : null;
 
   return (
@@ -46,7 +46,7 @@ export default function VideoModal({
       onClick={onClose}
     >
       {/* Scrim */}
-      <div className="absolute inset-0 bg-[rgba(11,13,18,0.55)] backdrop-blur-md" />
+      <div className="absolute inset-0 bg-[rgba(26,43,74,0.55)] backdrop-blur-md" />
 
       {/* Dialog */}
       <div
@@ -57,7 +57,7 @@ export default function VideoModal({
         <div className="flex items-start justify-between gap-4 mb-4">
           <div className="min-w-0">
             <div className="flex items-center gap-2 text-[11px] tracking-[0.22em] uppercase text-[var(--muted-2)] mb-1.5">
-              <span className="display text-[15px] text-[var(--gold)] leading-none tracking-normal normal-case">
+              <span className="display text-[15px] text-[var(--ocean)] leading-none tracking-normal normal-case">
                 {video.num}
               </span>
               <span>·</span>
@@ -121,7 +121,7 @@ export default function VideoModal({
                 <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden>
                   <path
                     d="M2 5.2L4 7.2L8.5 2.7"
-                    stroke="#0b0d12"
+                    stroke="#fbf9f6"
                     strokeWidth="1.8"
                     strokeLinecap="round"
                     strokeLinejoin="round"

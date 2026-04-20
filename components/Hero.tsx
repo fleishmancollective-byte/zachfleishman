@@ -6,7 +6,7 @@ const checkoutHref =
 export default function Hero() {
   return (
     <section id="top" className="relative pt-32 pb-20 sm:pt-40 sm:pb-28 px-6 overflow-hidden">
-      {/* Fluid orbs */}
+      {/* Fluid pastel orbs */}
       <div
         className="orb"
         style={{
@@ -43,7 +43,7 @@ export default function Hero() {
       <div className="relative max-w-4xl mx-auto text-center flex flex-col items-center">
         {/* Eyebrow */}
         <div className="fade-up inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-soft text-[12px] tracking-wide uppercase text-[var(--ink-soft)] font-medium mb-8">
-          <span className="w-1.5 h-1.5 rounded-full bg-[var(--gold)]" />
+          <span className="w-1.5 h-1.5 rounded-full bg-[var(--cloud)]" />
           A voice note · Not a course · $47
         </div>
 

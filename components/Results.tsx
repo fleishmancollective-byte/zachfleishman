@@ -3,25 +3,25 @@ const pulls = [
     quote:
       "You can't become the person you want to be in the same environment that built the version of you you're trying to outgrow.",
     tag: "From Video 2 · Why I Left the Script",
-    accent: "#cab6f0",
+    accent: "#305282", // Ocean Steel
   },
   {
     quote:
       "The vehicle is not the lifestyle. The vehicle is the thing that compounds when nobody's looking.",
     tag: "From Video 3 · Picking a Vehicle",
-    accent: "#f4cfa1",
+    accent: "#ffffff", // Cloud Mist
   },
   {
     quote:
       "I didn't need more information. I needed to stop lying to myself.",
     tag: "From Video 5 · The Gap No One Warns You About",
-    accent: "#a9c5f4",
+    accent: "#305282", // Ocean Steel
   },
   {
     quote:
       "You are allowed to be selfish about this. Not toxic. Not cruel. Just selfish enough to put your own becoming above other people's comfort with the old version of you.",
     tag: "From Video 6 · The Hard Conversation",
-    accent: "#b8e0c4",
+    accent: "#ffffff", // Cloud Mist
   },
 ];
 
