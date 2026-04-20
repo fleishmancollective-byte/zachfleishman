@@ -46,7 +46,7 @@ export default function FAQ() {
             return (
               <div
                 key={item.q}
-                className={`glass-soft rounded-[var(--r2)] transition-all duration-300 ${
+                className={`liquid-border rounded-[var(--r2)] transition-all duration-300 ${
                   isOpen ? "shadow-lg" : ""
                 }`}
               >

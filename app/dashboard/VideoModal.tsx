@@ -51,7 +51,7 @@ export default function VideoModal({
       {/* Dialog */}
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-4xl glass rounded-[18px] p-5 sm:p-7 animate-[fadeUp_0.25s_ease-out]"
+        className="relative w-full max-w-4xl liquid-border rounded-[18px] p-5 sm:p-7 animate-[fadeUp_0.25s_ease-out]"
       >
         {/* Header */}
         <div className="flex items-start justify-between gap-4 mb-4">

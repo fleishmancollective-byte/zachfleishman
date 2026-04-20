@@ -26,7 +26,7 @@ export default function ProductSection({
   const complete = totalTrackable > 0 && watchedCount === totalTrackable;
 
   return (
-    <section className="glass rounded-[18px] overflow-hidden">
+    <section className="liquid-border rounded-[18px] overflow-hidden">
       {/* Accordion header */}
       <button
         onClick={() => setOpen((o) => !o)}
@@ -131,9 +131,9 @@ function ResourceRow({ resource }: { resource: Resource }) {
   const ready = Boolean(resource.href);
   return (
     <div
-      className={`flex items-start gap-4 px-4 sm:px-6 py-4 sm:py-5 rounded-[var(--r2)] border border-[var(--border)] bg-white/50 ${
-        ready ? "hover:bg-white/75 hover:border-[var(--border-strong)] cursor-pointer" : ""
-      } transition-colors`}
+      className={`flex items-start gap-4 px-4 sm:px-6 py-4 sm:py-5 rounded-[var(--r2)] liquid-border ${
+        ready ? "cursor-pointer" : ""
+      }`}
       onClick={() => {
         if (resource.href) window.open(resource.href, "_blank", "noopener,noreferrer");
       }}

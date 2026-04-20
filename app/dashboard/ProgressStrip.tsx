@@ -10,7 +10,7 @@ export default function ProgressStrip({ watchedCount, totalCount }: Props) {
   const allDone = totalCount > 0 && watchedCount === totalCount;
 
   return (
-    <div className="glass rounded-[var(--r)] px-5 sm:px-8 py-5 sm:py-6 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8">
+    <div className="liquid-border rounded-[var(--r)] px-5 sm:px-8 py-5 sm:py-6 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8">
       <div className="flex-1 min-w-0">
         <div className="text-[11px] tracking-[0.22em] uppercase text-[var(--muted-2)] mb-1.5">
           Your progress

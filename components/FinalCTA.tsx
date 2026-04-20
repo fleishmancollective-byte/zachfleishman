@@ -5,7 +5,7 @@ export default function FinalCTA() {
   return (
     <section className="relative px-5 sm:px-6 py-20 sm:py-32">
       <div className="max-w-4xl mx-auto">
-        <div className="animate-on-scroll glass-bright rounded-[22px] p-8 sm:p-16 text-center relative overflow-hidden">
+        <div className="animate-on-scroll liquid-border rounded-[22px] p-8 sm:p-16 text-center relative overflow-hidden">
           <div
             className="absolute -top-24 -left-24 w-80 h-80 rounded-full opacity-55"
             style={{

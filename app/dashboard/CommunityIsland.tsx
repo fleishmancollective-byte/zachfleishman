@@ -11,7 +11,7 @@ export default function CommunityIsland() {
   return (
     <div className="fixed bottom-5 right-5 z-40 max-w-[calc(100vw-2.5rem)]">
       {open ? (
-        <div className="glass rounded-[18px] p-5 w-[300px] animate-[fadeUp_0.25s_ease-out]">
+        <div className="liquid-border rounded-[18px] p-5 w-[300px] animate-[fadeUp_0.25s_ease-out]">
           <div className="flex items-start justify-between gap-3 mb-3">
             <div>
               <div className="text-[10.5px] tracking-[0.22em] uppercase text-[var(--muted-2)] mb-1">

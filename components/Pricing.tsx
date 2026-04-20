@@ -40,7 +40,7 @@ export default function Pricing() {
           </p>
         </div>
 
-        <div className="animate-on-scroll glass-bright rounded-[22px] p-6 sm:p-12 relative overflow-hidden">
+        <div className="animate-on-scroll liquid-border rounded-[22px] p-6 sm:p-12 relative overflow-hidden">
           {/* Subtle mid accent */}
           <div
             className="absolute -top-20 -right-20 w-72 h-72 rounded-full opacity-40"

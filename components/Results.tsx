@@ -39,7 +39,7 @@ export default function Results() {
         </div>
 
         {/* Stat banner */}
-        <div className="animate-on-scroll glass rounded-[var(--r)] py-8 px-6 sm:px-10 mb-12">
+        <div className="animate-on-scroll liquid-border rounded-[var(--r)] py-8 px-6 sm:px-10 mb-12">
           <div className="grid sm:grid-cols-3 gap-6 sm:gap-10 text-center">
             {[
               { k: "Live", v: "Monthly Q&As with me, in the room" },
@@ -62,7 +62,7 @@ export default function Results() {
           {pulls.map((p) => (
             <figure
               key={p.tag}
-              className="animate-on-scroll glass-soft rounded-[var(--r2)] p-7 lift relative overflow-hidden"
+              className="animate-on-scroll liquid-border rounded-[var(--r2)] p-7 relative overflow-hidden"
             >
               <div
                 className="absolute -top-10 -right-10 w-40 h-40 rounded-full opacity-60"
