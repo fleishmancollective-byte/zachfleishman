@@ -1,26 +1,45 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
 /**
- * Type system: the original cream editorial direction.
- * - Playfair Display (serif, dramatic) for display headlines with italic em accent.
- * - Inter (sans, clean) for body + UI chrome.
+ * Type system: Syne for display headlines, Urbanist for body + UI chrome.
  *
- * Variables are keyed as --font-grotesk (→ Inter) and --font-serif (→ Playfair)
- * so globals.css flips them in one place.
+ * Both are variable fonts shipped locally from app/fonts/. The CSS var names
+ * --font-display and --font-body flip the stack in one place (globals.css).
+ *
+ * Urbanist ships with a paired italic variable so the italic <em> inside a
+ * .display headline renders as real italic (Syne has no italic axis, so the
+ * em falls back to Urbanist-Italic for that single editorial accent).
  */
 
-const grotesk = Inter({
-  variable: "--font-grotesk",
-  subsets: ["latin"],
+const display = localFont({
+  variable: "--font-display",
+  src: [
+    {
+      path: "./fonts/Syne-VariableFont_wght.ttf",
+      style: "normal",
+      weight: "400 800",
+    },
+  ],
+  display: "swap",
 });
 
-const serif = Playfair_Display({
-  variable: "--font-serif",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
+const body = localFont({
+  variable: "--font-body",
+  src: [
+    {
+      path: "./fonts/Urbanist-VariableFont_wght.ttf",
+      style: "normal",
+      weight: "100 900",
+    },
+    {
+      path: "./fonts/Urbanist-Italic-VariableFont_wght.ttf",
+      style: "italic",
+      weight: "100 900",
+    },
+  ],
+  display: "swap",
 });
 
 const title = "Zero to Six · Zach Fleishman";
@@ -53,7 +72,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${grotesk.variable} ${serif.variable} h-full antialiased`}>
+    <html lang="en" className={`${body.variable} ${display.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
