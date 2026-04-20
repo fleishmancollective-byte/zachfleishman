@@ -9,14 +9,12 @@ export default function Hero() {
       id="top"
       className="relative pt-28 pb-24 sm:pt-36 sm:pb-32 px-5 sm:px-6 overflow-hidden"
     >
-      {/* Single sky-blue halo — the one light source. The page-level
-          body::after carries the rest of the atmosphere. Keeping this
-          lean on purpose. */}
+      {/* Very subtle sky glow behind the headline. Clean. */}
       <div
-        className="absolute left-1/2 top-[18%] -translate-x-1/2 w-[760px] h-[760px] rounded-full pointer-events-none breathe-orb"
+        className="absolute left-1/2 top-[25%] -translate-x-1/2 w-[560px] h-[560px] rounded-full pointer-events-none"
         style={{
           background:
-            "radial-gradient(circle, rgba(191, 216, 238, 0.55) 0%, rgba(111, 168, 222, 0.25) 35%, transparent 72%)",
+            "radial-gradient(circle, rgba(191, 216, 238, 0.3) 0%, transparent 65%)",
           zIndex: 1,
         }}
       />

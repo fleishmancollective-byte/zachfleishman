@@ -6,9 +6,9 @@
    (deep blue) carries italic em emphasis.
 */
 :root {
-  /* Base palette — cool light blue/white */
-  --bg: #f3f6fa;                         /* pale sky white */
-  --bg-tint: #fafcfe;                    /* near white, cool tint */
+  /* Base palette — clean, light, barely-off-white */
+  --bg: #f7f6f3;                         /* warm off-white */
+  --bg-tint: #fbfaf8;                    /* near white */
   --surface: rgba(255, 255, 255, 0.72);  /* glass panel */
   --surface-2: rgba(255, 255, 255, 0.55);/* lighter glass */
   --border: rgba(17, 24, 39, 0.08);
@@ -104,43 +104,22 @@ body {
   position: relative;
 }
 
-/* ─── Edge vignette ───
-   Very soft sky-blue frame around the viewport edges. No peach, no
-   warm tones — keeps the whole page in the blue/white family. */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 140% 80% at 50% 0%, transparent 55%, rgba(137, 189, 235, 0.14) 100%),
-    radial-gradient(ellipse 140% 80% at 50% 100%, transparent 55%, rgba(137, 189, 235, 0.10) 100%);
-  pointer-events: none;
-  z-index: 60;
-  mix-blend-mode: multiply;
-  opacity: 0.8;
-}
+/* No edge vignette — the page reads clean, not atmospheric. */
+body::before { display: none; }
 
-/* ─── Blue / white atmosphere ───
-   Clean soft-sky gradient only. Just layered blue pools drifting on a
-   near-white base. No peach, no mint, no violet — single family. */
+/* ─── Clean neutral base ───
+   Just a whisper of sky blue in two corners so cards have subtle
+   color pooling beneath them. Intentionally quiet — the glass cards
+   and buttons carry the personality, not the bg. */
 body::after {
   content: '';
   position: fixed;
   inset: 0;
   background:
-    /* Upper-left: soft sky */
-    radial-gradient(ellipse 70% 55% at 18% 10%, rgba(169, 207, 240, 0.55) 0%, transparent 60%),
-    /* Upper-right: paler sky */
-    radial-gradient(ellipse 60% 50% at 88% 15%, rgba(199, 224, 244, 0.55) 0%, transparent 60%),
-    /* Mid-right: sky blue accent */
-    radial-gradient(ellipse 55% 55% at 95% 55%, rgba(137, 189, 235, 0.42) 0%, transparent 62%),
-    /* Bottom: broad soft sky wash */
-    radial-gradient(ellipse 90% 55% at 50% 100%, rgba(169, 207, 240, 0.38) 0%, transparent 65%),
-    /* Center bright bloom */
-    radial-gradient(ellipse 80% 60% at 50% 45%, rgba(255, 255, 255, 0.30) 0%, transparent 60%);
+    radial-gradient(ellipse 60% 50% at 15% 15%, rgba(169, 207, 240, 0.22) 0%, transparent 60%),
+    radial-gradient(ellipse 55% 50% at 90% 85%, rgba(199, 224, 244, 0.2) 0%, transparent 60%);
   pointer-events: none;
   z-index: 0;
-  animation: liquid-drift 32s ease-in-out infinite alternate;
 }
 @keyframes liquid-drift {
   0%   { transform: translate3d(0, 0, 0) scale(1); }
