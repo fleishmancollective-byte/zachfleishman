@@ -103,7 +103,7 @@ export default function WhatsInside() {
               className="animate-on-scroll glass-soft rounded-[var(--r2)] p-6 sm:p-7 lift"
             >
               <div className="flex items-start gap-4">
-                <span className="display text-[30px] text-[var(--gold)] leading-none shrink-0 w-[42px]">
+                <span className="display text-[30px] text-[var(--ocean)] leading-none shrink-0 w-[42px]">
                   {l.n}
                 </span>
                 <div className="flex-1 min-w-0">

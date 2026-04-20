@@ -24,7 +24,14 @@ export default function Nav() {
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <a href="#top" className="flex items-center gap-2.5 text-[15px] tracking-tight">
-          <span className="w-7 h-7 rounded-full bg-[var(--ink)] text-[var(--bg)] grid place-items-center text-[11px] font-semibold">
+          <span
+            className="w-7 h-7 rounded-full grid place-items-center text-[11px] font-semibold"
+            style={{
+              background:
+                "linear-gradient(135deg, #f4cfa1 0%, #c9a063 100%)",
+              color: "#0b0d12",
+            }}
+          >
             Z
           </span>
           <span className="font-medium">

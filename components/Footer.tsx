@@ -1,9 +1,16 @@
 export default function Footer() {
   return (
-    <footer className="relative z-10 border-t border-[var(--border)] px-6 py-10 bg-white/30 backdrop-blur-sm">
+    <footer className="relative z-10 border-t border-[var(--border)] px-6 py-10 bg-[rgba(255,255,255,0.03)] backdrop-blur-sm">
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-[13px] text-[var(--muted)]">
         <div className="flex items-center gap-2.5">
-          <span className="w-6 h-6 rounded-full bg-[var(--ink)] text-[var(--bg)] grid place-items-center text-[10px] font-semibold">
+          <span
+            className="w-6 h-6 rounded-full grid place-items-center text-[10px] font-semibold"
+            style={{
+              background:
+                "linear-gradient(135deg, #f4cfa1 0%, #c9a063 100%)",
+              color: "#0b0d12",
+            }}
+          >
             Z
           </span>
           <span>

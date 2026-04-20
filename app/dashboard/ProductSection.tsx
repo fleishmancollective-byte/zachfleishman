@@ -131,8 +131,8 @@ function ResourceRow({ resource }: { resource: Resource }) {
   const ready = Boolean(resource.href);
   return (
     <div
-      className={`flex items-start gap-4 px-5 sm:px-6 py-4 sm:py-5 rounded-[var(--r2)] border border-[var(--border)] bg-white/50 ${
-        ready ? "hover:bg-white/75 cursor-pointer" : ""
+      className={`flex items-start gap-4 px-4 sm:px-6 py-4 sm:py-5 rounded-[var(--r2)] border border-[var(--border)] bg-white/50 ${
+        ready ? "hover:bg-white/75 hover:border-[var(--border-strong)] cursor-pointer" : ""
       } transition-colors`}
       onClick={() => {
         if (resource.href) window.open(resource.href, "_blank", "noopener,noreferrer");

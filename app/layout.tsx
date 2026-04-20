@@ -2,15 +2,25 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+/**
+ * Type system: the original cream editorial direction.
+ * - Playfair Display (serif, dramatic) for display headlines with italic em accent.
+ * - Inter (sans, clean) for body + UI chrome.
+ *
+ * Variables are keyed as --font-grotesk (→ Inter) and --font-serif (→ Playfair)
+ * so globals.css flips them in one place.
+ */
+
+const grotesk = Inter({
+  variable: "--font-grotesk",
   subsets: ["latin"],
 });
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const serif = Playfair_Display({
+  variable: "--font-serif",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
 });
 
 const title = "Zero to Six · Zach Fleishman";
@@ -43,7 +53,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable} h-full antialiased`}>
+    <html lang="en" className={`${grotesk.variable} ${serif.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
