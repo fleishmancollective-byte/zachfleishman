@@ -177,37 +177,54 @@ body::after {
 }
 
 /* ─── Liquid border ───
-   Card with a flowing glass border that catches sky-blue light. Uses the
-   dual-background-clip trick: interior gets a translucent white fill,
-   exterior "border" gets a gradient ring that blends through sky-blue
-   highlights. Pairs with glass blur for the full frosted card look. */
+   Frosted glass card that reads as "a white card" on our cream bg while
+   still feeling translucent/light. Dual-background-clip trick:
+   - padding-box: a near-white fill with cool sky-blue hint (high opacity
+     so the card is visible as an object, not see-through).
+   - border-box: sky-blue → white gradient ring with brighter top-left
+     highlight so the edge catches light.
+   Heavy shadow below so the card floats off the page. */
 .liquid-border {
   position: relative;
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.42) 100%) padding-box,
+    linear-gradient(
+      160deg,
+      rgba(255, 255, 255, 0.92) 0%,
+      rgba(248, 251, 254, 0.85) 50%,
+      rgba(235, 244, 252, 0.82) 100%
+    ) padding-box,
     linear-gradient(
       135deg,
       rgba(255, 255, 255, 1) 0%,
-      rgba(191, 216, 238, 0.9) 28%,
-      rgba(111, 168, 222, 0.6) 50%,
-      rgba(255, 255, 255, 0.88) 75%,
-      rgba(191, 216, 238, 0.75) 100%
+      rgba(208, 228, 244, 0.95) 25%,
+      rgba(111, 168, 222, 0.75) 50%,
+      rgba(255, 255, 255, 0.9) 75%,
+      rgba(191, 216, 238, 0.85) 100%
     ) border-box;
   border: 1.5px solid transparent;
-  backdrop-filter: blur(18px) saturate(160%);
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  backdrop-filter: blur(22px) saturate(170%);
+  -webkit-backdrop-filter: blur(22px) saturate(170%);
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.85) inset,
-    0 22px 60px -22px rgba(111, 168, 222, 0.28),
-    0 8px 20px -8px rgba(17, 24, 39, 0.08);
+    /* Bright top-edge highlight — lit from above */
+    0 1px 0 rgba(255, 255, 255, 1) inset,
+    /* Soft inner glow keeping the frosted edge */
+    0 0 0 1px rgba(255, 255, 255, 0.55) inset,
+    /* Sky-blue tinted ambient shadow */
+    0 40px 90px -24px rgba(111, 168, 222, 0.38),
+    /* Crisper contact shadow for depth */
+    0 12px 28px -10px rgba(17, 24, 39, 0.14),
+    /* Hairline separation from bg */
+    0 2px 6px -2px rgba(17, 24, 39, 0.08);
   transition: transform 0.3s cubic-bezier(.22,1,.36,1), box-shadow 0.3s;
 }
 .liquid-border:hover {
   transform: translateY(-2px);
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.95) inset,
-    0 32px 80px -22px rgba(111, 168, 222, 0.42),
-    0 12px 26px -8px rgba(17, 24, 39, 0.1);
+    0 1px 0 rgba(255, 255, 255, 1) inset,
+    0 0 0 1px rgba(255, 255, 255, 0.7) inset,
+    0 50px 110px -24px rgba(111, 168, 222, 0.5),
+    0 18px 40px -12px rgba(17, 24, 39, 0.18),
+    0 2px 6px -2px rgba(17, 24, 39, 0.1);
 }
 /* Bright frosted card — Pricing + FinalCTA. More translucent so the
    atmospheric bg reads through the card (highflyers-style). */
