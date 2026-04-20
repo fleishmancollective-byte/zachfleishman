@@ -115,7 +115,7 @@ export default function VideoModal({
               <span
                 className="w-4 h-4 rounded-full grid place-items-center"
                 style={{
-                  background: "linear-gradient(135deg, #f4cfa1 0%, #c9a063 100%)",
+                  background: "linear-gradient(135deg, #bfd8ee 0%, #6fa8de 50%, #4685c4 100%)",
                 }}
               >
                 <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden>

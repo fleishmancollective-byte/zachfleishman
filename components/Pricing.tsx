@@ -74,7 +74,7 @@ export default function Pricing() {
                 className="px-3 py-1.5 rounded-full text-[11px] tracking-[0.18em] uppercase font-semibold"
                 style={{
                   background:
-                    "linear-gradient(135deg, #f4cfa1 0%, #c9a063 100%)",
+                    "linear-gradient(135deg, #bfd8ee 0%, #6fa8de 50%, #4685c4 100%)",
                   color: "#0b0d12",
                 }}
               >
@@ -89,7 +89,7 @@ export default function Pricing() {
                     className="mt-[5px] w-4 h-4 rounded-full grid place-items-center shrink-0"
                     style={{
                       background:
-                        "linear-gradient(135deg, #f4cfa1 0%, #c9a063 100%)",
+                        "linear-gradient(135deg, #bfd8ee 0%, #6fa8de 50%, #4685c4 100%)",
                     }}
                   >
                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden>

@@ -7,7 +7,7 @@ export default function Footer() {
             className="w-6 h-6 rounded-full grid place-items-center text-[10px] font-semibold"
             style={{
               background:
-                "linear-gradient(135deg, #f4cfa1 0%, #c9a063 100%)",
+                "linear-gradient(135deg, #bfd8ee 0%, #6fa8de 50%, #4685c4 100%)",
               color: "#0b0d12",
             }}
           >

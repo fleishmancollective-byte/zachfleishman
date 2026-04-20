@@ -20,14 +20,14 @@
   --accent: #0b0d12;                     /* primary CTA = near-black */
   --accent-hover: #1a1f2b;
 
-  /* Accent — lavender/purple per highflyers direction. Keeps blue
-     as a secondary accent for depth. */
-  --lavender: #9a7adc;         /* primary accent — CTA arrow circles, display gradients */
-  --lavender-deep: #7e5bc8;    /* hover / richer moments */
-  --lavender-soft: #c2b0ed;    /* lighter stops in gradients */
+  /* Accent — sky blue. Primary for CTAs, numbers, display gradients.
+     --blue kept as a secondary deeper-tone accent for depth. */
+  --accent-sky: #6fa8de;         /* primary sky-blue accent */
+  --accent-deep: #4685c4;    /* deep sky blue for hover / richer moments */
+  --accent-soft: #bfd8ee;    /* pale sky for gradient highlights */
 
-  --blue: #5b75ba;             /* secondary accent (kept for em fallbacks, stat gradients) */
-  --blue-deep: #3a5496;
+  --blue: #3778bd;             /* secondary deeper sky-blue */
+  --blue-deep: #1f5791;
 
   /* Sky + cloud atmosphere */
   --sky-top: #cbe1f4;
@@ -43,8 +43,8 @@
   --lilac: #cab6f0;
 
   /* Legacy aliases so older component references still resolve cleanly */
-  --gold: var(--lavender);      /* legacy gold refs now read as lavender */
-  --ocean: var(--lavender);
+  --gold: var(--accent-sky);      /* legacy gold refs now read as sky-blue */
+  --ocean: var(--accent-sky);
   --cloud: var(--bg-tint);
   --slate: var(--ink);
   --jet: var(--ink);
@@ -123,15 +123,15 @@ body::before {
 
 /* ─── Liquid light atmosphere ───
    Fluid, light-accentuated backdrop. Multiple soft radial gradients in
-   lavender / sky / peach layered and drifting, so the page feels like
+   sky-blue / sky / peach layered and drifting, so the page feels like
    light refracting through glass — no hard shapes, no photography. */
 body::after {
   content: '';
   position: fixed;
   inset: 0;
   background:
-    /* Top-left: lavender light pool */
-    radial-gradient(ellipse 70% 55% at 20% 10%, rgba(194, 176, 237, 0.55) 0%, transparent 55%),
+    /* Top-left: sky-blue light pool */
+    radial-gradient(ellipse 70% 55% at 20% 10%, rgba(191, 216, 238, 0.55) 0%, transparent 55%),
     /* Upper-right: warm peach glow */
     radial-gradient(ellipse 55% 45% at 90% 15%, rgba(244, 207, 161, 0.45) 0%, transparent 55%),
     /* Mid-right: cool sky highlight */
@@ -175,6 +175,40 @@ body::after {
   -webkit-backdrop-filter: blur(14px) saturate(160%);
   border-bottom: 1px solid var(--border);
 }
+
+/* ─── Liquid border ───
+   Card with a flowing glass border that catches sky-blue light. Uses the
+   dual-background-clip trick: interior gets a translucent white fill,
+   exterior "border" gets a gradient ring that blends through sky-blue
+   highlights. Pairs with glass blur for the full frosted card look. */
+.liquid-border {
+  position: relative;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.42) 100%) padding-box,
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(191, 216, 238, 0.9) 28%,
+      rgba(111, 168, 222, 0.6) 50%,
+      rgba(255, 255, 255, 0.88) 75%,
+      rgba(191, 216, 238, 0.75) 100%
+    ) border-box;
+  border: 1.5px solid transparent;
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.85) inset,
+    0 22px 60px -22px rgba(111, 168, 222, 0.28),
+    0 8px 20px -8px rgba(17, 24, 39, 0.08);
+  transition: transform 0.3s cubic-bezier(.22,1,.36,1), box-shadow 0.3s;
+}
+.liquid-border:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.95) inset,
+    0 32px 80px -22px rgba(111, 168, 222, 0.42),
+    0 12px 26px -8px rgba(17, 24, 39, 0.1);
+}
 /* Bright frosted card — Pricing + FinalCTA. More translucent so the
    atmospheric bg reads through the card (highflyers-style). */
 .glass-bright {
@@ -185,7 +219,7 @@ body::after {
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 1) inset,
     0 -1px 0 rgba(17, 24, 39, 0.04) inset,
-    0 40px 120px -30px rgba(154, 122, 220, 0.32),
+    0 40px 120px -30px rgba(111, 168, 222, 0.32),
     0 12px 30px -12px rgba(17, 24, 39, 0.14);
 }
 
@@ -262,7 +296,7 @@ body::after {
   border-radius: 50%;
   background:
     radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.15) 50%, transparent 80%),
-    linear-gradient(135deg, rgba(154, 122, 220, 0.25) 0%, rgba(91, 117, 186, 0.18) 100%);
+    linear-gradient(135deg, rgba(111, 168, 222, 0.25) 0%, rgba(91, 117, 186, 0.18) 100%);
   border: 1px solid rgba(255, 255, 255, 0.55);
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
@@ -282,14 +316,14 @@ body::after {
   letter-spacing: -0.035em;
   line-height: 1.02;
 }
-/* Em inside a display headline carries the accent. Lavender→blue
+/* Em inside a display headline carries the accent. Sky-blue→blue
    gradient text per highflyers. No italic, no cursive. */
 .display em {
   font-family: inherit;
   font-style: normal;
   font-weight: 700;
   letter-spacing: -0.03em;
-  background: linear-gradient(110deg, var(--lavender) 0%, var(--blue) 50%, var(--lavender-deep) 100%);
+  background: linear-gradient(110deg, var(--accent-sky) 0%, var(--blue) 50%, var(--accent-deep) 100%);
   background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -343,8 +377,8 @@ body::after {
   border-color: var(--ink-soft);
 }
 
-/* Glass CTA pill with trailing lavender arrow circle — the highflyers
-   signature button. Text sits left, big lavender gradient circle with
+/* Glass CTA pill with trailing sky-blue arrow circle — the highflyers
+   signature button. Text sits left, big sky-blue gradient circle with
    arrow sits flush-right. Pairs with .glass-pill stack. */
 .btn-arrow {
   display: inline-flex;
@@ -358,7 +392,7 @@ body::after {
   -webkit-backdrop-filter: blur(22px) saturate(180%);
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 1) inset,
-    0 20px 48px -14px rgba(154, 122, 220, 0.35),
+    0 20px 48px -14px rgba(111, 168, 222, 0.35),
     0 4px 14px -4px rgba(17, 24, 39, 0.1);
   color: var(--ink);
   font-size: 14px;
@@ -372,7 +406,7 @@ body::after {
   transform: translateY(-1px);
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 1) inset,
-    0 28px 60px -14px rgba(154, 122, 220, 0.5),
+    0 28px 60px -14px rgba(111, 168, 222, 0.5),
     0 6px 18px -4px rgba(17, 24, 39, 0.14);
 }
 .btn-arrow > .arrow-circle {
@@ -382,10 +416,10 @@ body::after {
   display: grid;
   place-items: center;
   color: #fbf9f6;
-  background: linear-gradient(135deg, var(--lavender-soft) 0%, var(--lavender) 45%, var(--lavender-deep) 100%);
+  background: linear-gradient(135deg, var(--accent-soft) 0%, var(--accent-sky) 45%, var(--accent-deep) 100%);
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.55) inset,
-    0 8px 20px -6px rgba(126, 91, 200, 0.6);
+    0 8px 20px -6px rgba(70, 133, 196, 0.6);
   flex: 0 0 auto;
   transition: transform 0.25s cubic-bezier(.22,1,.36,1);
 }

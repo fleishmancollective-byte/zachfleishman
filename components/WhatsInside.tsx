@@ -100,7 +100,7 @@ export default function WhatsInside() {
           {lessons.map((l) => (
             <div
               key={l.n}
-              className="animate-on-scroll glass-soft rounded-[var(--r2)] p-6 sm:p-7 lift"
+              className="animate-on-scroll liquid-border rounded-[var(--r2)] p-6 sm:p-7"
             >
               <div className="flex items-start gap-4">
                 <span className="display text-[30px] text-[var(--ocean)] leading-none shrink-0 w-[42px]">
@@ -137,14 +137,14 @@ export default function WhatsInside() {
             {bonuses.map((b) => (
               <div
                 key={b.title}
-                className="animate-on-scroll glass rounded-[var(--r2)] p-6 lift"
+                className="animate-on-scroll liquid-border rounded-[var(--r2)] p-6"
               >
                 <div className="flex items-center gap-2 mb-3">
                   <span
                     className="w-6 h-6 rounded-full grid place-items-center text-[10px] font-semibold"
                     style={{
                       background:
-                        "linear-gradient(135deg, #f4cfa1 0%, #c9a063 100%)",
+                        "linear-gradient(135deg, #bfd8ee 0%, #6fa8de 50%, #4685c4 100%)",
                       color: "#0b0d12",
                     }}
                   >

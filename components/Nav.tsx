@@ -20,7 +20,7 @@ export default function Nav() {
           backdropFilter: "blur(24px) saturate(180%)",
           WebkitBackdropFilter: "blur(24px) saturate(180%)",
           boxShadow:
-            "0 1px 0 rgba(255, 255, 255, 1) inset, 0 16px 40px -12px rgba(154, 122, 220, 0.3), 0 4px 14px -4px rgba(17, 24, 39, 0.08)",
+            "0 1px 0 rgba(255, 255, 255, 1) inset, 0 16px 40px -12px rgba(111, 168, 222, 0.3), 0 4px 14px -4px rgba(17, 24, 39, 0.08)",
         }}
       >
         {/* Brand mark */}
@@ -66,7 +66,7 @@ export default function Nav() {
           Log in
         </Link>
 
-        {/* Primary CTA — lavender arrow circle */}
+        {/* Primary CTA — sky-blue arrow circle */}
         <a
           href={checkoutHref}
           className="flex items-center gap-2 pl-3 sm:pl-4 pr-1 py-1 ml-1 rounded-full text-[13px] text-[var(--ink)] font-medium hover:bg-white/60 transition-colors whitespace-nowrap"
@@ -77,10 +77,10 @@ export default function Nav() {
             className="w-8 h-8 rounded-full grid place-items-center"
             style={{
               background:
-                "linear-gradient(135deg, #c2b0ed 0%, #9a7adc 45%, #7e5bc8 100%)",
+                "linear-gradient(135deg, #bfd8ee 0%, #6fa8de 45%, #4685c4 100%)",
               color: "#fbf9f6",
               boxShadow:
-                "0 1px 0 rgba(255, 255, 255, 0.55) inset, 0 6px 16px -4px rgba(126, 91, 200, 0.55)",
+                "0 1px 0 rgba(255, 255, 255, 0.55) inset, 0 6px 16px -4px rgba(70, 133, 196, 0.55)",
             }}
           >
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden>

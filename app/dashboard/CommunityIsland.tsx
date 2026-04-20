@@ -41,7 +41,7 @@ export default function CommunityIsland() {
               className="w-7 h-7 rounded-full grid place-items-center shrink-0"
               style={{
                 background:
-                  "linear-gradient(135deg, #f4cfa1 0%, #c9a063 100%)",
+                  "linear-gradient(135deg, #bfd8ee 0%, #6fa8de 50%, #4685c4 100%)",
                 color: "#0b0d12",
               }}
             >
@@ -87,7 +87,7 @@ export default function CommunityIsland() {
           <span
             className="w-8 h-8 rounded-full grid place-items-center shrink-0"
             style={{
-              background: "linear-gradient(135deg, #f4cfa1 0%, #c9a063 100%)",
+              background: "linear-gradient(135deg, #bfd8ee 0%, #6fa8de 50%, #4685c4 100%)",
               color: "#0b0d12",
             }}
           >

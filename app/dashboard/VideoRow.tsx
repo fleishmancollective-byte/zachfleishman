@@ -17,10 +17,8 @@ export default function VideoRow({
 }: Props) {
   return (
     <div
-      className={`group relative flex items-start gap-3 sm:gap-5 px-4 sm:px-6 py-4 sm:py-5 rounded-[var(--r2)] transition-all cursor-pointer border ${
-        isWatched
-          ? "bg-white/40 border-[var(--border)]"
-          : "bg-white/60 border-[var(--border-strong)] hover:bg-white/80 hover:shadow-md"
+      className={`group relative flex items-start gap-3 sm:gap-5 px-4 sm:px-6 py-4 sm:py-5 rounded-[var(--r2)] cursor-pointer liquid-border ${
+        isWatched ? "opacity-75" : ""
       }`}
       onClick={onPlay}
       role="button"
@@ -45,7 +43,8 @@ export default function VideoRow({
           isWatched
             ? {
                 background:
-                  "linear-gradient(135deg, #f4cfa1 0%, #c9a063 100%)",
+                  "linear-gradient(135deg, #bfd8ee 0%, #6fa8de 50%, #4685c4 100%)",
+                boxShadow: "0 4px 10px -3px rgba(70, 133, 196, 0.5)",
               }
             : {
                 background: "transparent",

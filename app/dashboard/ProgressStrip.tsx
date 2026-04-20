@@ -38,7 +38,7 @@ export default function ProgressStrip({ watchedCount, totalCount }: Props) {
             style={{
               width: `${pct}%`,
               background:
-                "linear-gradient(90deg, #0b0d12 0%, #c9a063 100%)",
+                "linear-gradient(90deg, #6fa8de 0%, #4685c4 100%)",
             }}
           />
         </div>
