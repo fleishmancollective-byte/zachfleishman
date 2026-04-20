@@ -122,28 +122,30 @@ body::before {
 }
 
 /* ─── Liquid light atmosphere ───
-   Fluid, light-accentuated backdrop. Multiple soft radial gradients in
-   sky-blue / sky / peach layered and drifting, so the page feels like
-   light refracting through glass — no hard shapes, no photography. */
+   Fluid backdrop with real color saturation so frosted cards have
+   something worth refracting. Deeper sky-blue pools, richer peach
+   glow, more visible mint — no more watered-down pastels. */
 body::after {
   content: '';
   position: fixed;
   inset: 0;
   background:
-    /* Top-left: sky-blue light pool */
-    radial-gradient(ellipse 70% 55% at 20% 10%, rgba(191, 216, 238, 0.55) 0%, transparent 55%),
-    /* Upper-right: warm peach glow */
-    radial-gradient(ellipse 55% 45% at 90% 15%, rgba(244, 207, 161, 0.45) 0%, transparent 55%),
-    /* Mid-right: cool sky highlight */
-    radial-gradient(ellipse 60% 55% at 95% 55%, rgba(169, 197, 244, 0.42) 0%, transparent 60%),
+    /* Top-left: sky-blue pool, strong */
+    radial-gradient(ellipse 75% 60% at 18% 8%, rgba(137, 189, 235, 0.75) 0%, transparent 60%),
+    /* Upper-right: peach glow */
+    radial-gradient(ellipse 60% 50% at 92% 12%, rgba(244, 196, 140, 0.62) 0%, transparent 60%),
+    /* Mid-right: cool sky */
+    radial-gradient(ellipse 65% 60% at 95% 55%, rgba(141, 182, 236, 0.60) 0%, transparent 62%),
     /* Bottom-left: mint wash */
-    radial-gradient(ellipse 65% 50% at 5% 85%, rgba(184, 224, 196, 0.32) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 55% at 5% 88%, rgba(156, 212, 174, 0.52) 0%, transparent 62%),
+    /* Bottom-right: deeper sky */
+    radial-gradient(ellipse 60% 50% at 85% 92%, rgba(111, 168, 222, 0.55) 0%, transparent 65%),
     /* Center luminous bloom */
-    radial-gradient(ellipse 80% 60% at 50% 45%, rgba(255, 255, 255, 0.5) 0%, transparent 60%);
+    radial-gradient(ellipse 80% 60% at 50% 45%, rgba(255, 255, 255, 0.35) 0%, transparent 60%);
   pointer-events: none;
   z-index: 0;
   animation: liquid-drift 32s ease-in-out infinite alternate;
-  filter: saturate(110%);
+  filter: saturate(115%);
 }
 @keyframes liquid-drift {
   0%   { transform: translate3d(0, 0, 0) scale(1); }
@@ -177,44 +179,46 @@ body::after {
 }
 
 /* ─── Liquid border ───
-   Frosted glass card that reads as "a white card" on our cream bg while
-   still feeling translucent/light. Dual-background-clip trick:
-   - padding-box: a near-white fill with cool sky-blue hint (high opacity
-     so the card is visible as an object, not see-through).
-   - border-box: sky-blue → white gradient ring with brighter top-left
-     highlight so the edge catches light.
-   Heavy shadow below so the card floats off the page. */
+   True frosted glass: translucent enough that the colorful atmosphere
+   bleeds through the blur. Interior is a radial highlight fading from
+   bright top-left (48% opacity) down to more translucent (28%), so the
+   card reads as lit glass, not a flat opaque panel.
+   Border ring is sky-blue gradient that catches light.
+   Heavy blur saturates the backdrop into a visible frosted color wash. */
 .liquid-border {
   position: relative;
   background:
-    linear-gradient(
-      160deg,
-      rgba(255, 255, 255, 0.92) 0%,
-      rgba(248, 251, 254, 0.85) 50%,
-      rgba(235, 244, 252, 0.82) 100%
+    /* Interior fill — radial highlight simulating light across glass */
+    radial-gradient(
+      ellipse 130% 100% at 20% 0%,
+      rgba(255, 255, 255, 0.58) 0%,
+      rgba(255, 255, 255, 0.38) 45%,
+      rgba(240, 248, 255, 0.30) 100%
     ) padding-box,
+    /* Border ring — flowing sky-blue gradient */
     linear-gradient(
       135deg,
       rgba(255, 255, 255, 1) 0%,
-      rgba(208, 228, 244, 0.95) 25%,
-      rgba(111, 168, 222, 0.75) 50%,
-      rgba(255, 255, 255, 0.9) 75%,
-      rgba(191, 216, 238, 0.85) 100%
+      rgba(208, 228, 244, 0.98) 25%,
+      rgba(111, 168, 222, 0.9) 50%,
+      rgba(255, 255, 255, 0.95) 75%,
+      rgba(191, 216, 238, 0.9) 100%
     ) border-box;
   border: 1.5px solid transparent;
-  backdrop-filter: blur(22px) saturate(170%);
-  -webkit-backdrop-filter: blur(22px) saturate(170%);
+  /* Heavy blur + high saturation so the bg color pops through frosted */
+  backdrop-filter: blur(32px) saturate(200%) brightness(1.05);
+  -webkit-backdrop-filter: blur(32px) saturate(200%) brightness(1.05);
   box-shadow:
     /* Bright top-edge highlight — lit from above */
     0 1px 0 rgba(255, 255, 255, 1) inset,
-    /* Soft inner glow keeping the frosted edge */
-    0 0 0 1px rgba(255, 255, 255, 0.55) inset,
+    /* Inner frosted glow */
+    0 0 0 1px rgba(255, 255, 255, 0.5) inset,
     /* Sky-blue tinted ambient shadow */
-    0 40px 90px -24px rgba(111, 168, 222, 0.38),
+    0 40px 90px -24px rgba(111, 168, 222, 0.42),
     /* Crisper contact shadow for depth */
-    0 12px 28px -10px rgba(17, 24, 39, 0.14),
-    /* Hairline separation from bg */
-    0 2px 6px -2px rgba(17, 24, 39, 0.08);
+    0 12px 28px -10px rgba(17, 24, 39, 0.12),
+    /* Hairline separation */
+    0 2px 6px -2px rgba(17, 24, 39, 0.06);
   transition: transform 0.3s cubic-bezier(.22,1,.36,1), box-shadow 0.3s;
 }
 .liquid-border:hover {
@@ -222,8 +226,8 @@ body::after {
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 1) inset,
     0 0 0 1px rgba(255, 255, 255, 0.7) inset,
-    0 50px 110px -24px rgba(111, 168, 222, 0.5),
-    0 18px 40px -12px rgba(17, 24, 39, 0.18),
+    0 50px 110px -24px rgba(111, 168, 222, 0.55),
+    0 18px 40px -12px rgba(17, 24, 39, 0.16),
     0 2px 6px -2px rgba(17, 24, 39, 0.1);
 }
 /* Bright frosted card — Pricing + FinalCTA. More translucent so the
