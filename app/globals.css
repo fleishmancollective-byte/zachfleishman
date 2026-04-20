@@ -70,8 +70,6 @@
   --color-mint: var(--mint);
   --color-sky: var(--sky);
   --color-lilac: var(--lilac);
-  --font-sans: var(--font-grotesk);
-  --font-serif: var(--font-serif);
 }
 
 html, body {
@@ -85,7 +83,7 @@ html, body {
   overscroll-behavior-x: none;
 }
 body {
-  font-family: var(--font-grotesk), -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, sans-serif;
+  font-family: var(--font-body), "Urbanist", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, sans-serif;
   font-size: 15px;
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
@@ -162,19 +160,24 @@ body::after {
     0 30px 90px -20px rgba(17, 24, 39, 0.22);
 }
 
-/* ─── Editorial serif display headlines ─── */
+/* ─── Editorial display headlines ─── */
+/* Syne is a geometric display sans. It sets the voice for all h1/h2/h3
+   and anything with .display. Weight 500 is the workhorse; variable font
+   gives us 400–800 interpolated. */
 .display {
-  font-family: var(--font-serif), "Times New Roman", Georgia, serif;
+  font-family: var(--font-display), "Syne", Impact, "Helvetica Neue", sans-serif;
   font-weight: 500;
   letter-spacing: -0.025em;
   line-height: 1.02;
 }
-/* Italic em inside display headlines uses the editorial blue accent.
-   Swap from gold → blue per user direction. */
+/* Italic em inside a display headline is the editorial accent moment.
+   Syne has no italic axis, so we intentionally drop to Urbanist-Italic
+   (a thin-to-medium italic variable) to keep the italic lean. The blue
+   carries the emphasis. */
 .display em {
-  font-family: var(--font-serif), "Times New Roman", Georgia, serif;
+  font-family: var(--font-body), "Urbanist", Georgia, serif;
   font-style: italic;
-  font-weight: 400;
+  font-weight: 500;
   color: var(--blue);
 }
 
