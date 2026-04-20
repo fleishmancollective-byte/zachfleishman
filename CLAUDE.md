@@ -83,7 +83,7 @@ A voice note, not a course. A conversation, not instruction. Zach narrates how h
 - Animated flowing gradient text
 - Scroll-reveal `animate-on-scroll` + `stagger` pattern
 
-**Key inversion from Conetic:** Conetic is a dark SaaS dashboard aesthetic. This site is a **light** editorial aesthetic. Cream `#f7f5f1` background, Syne display headlines (geometric sans), Urbanist italic accents on key words in editorial blue. Same glassy/fluid vibe, inverted palette.
+**Key inversion from Conetic:** Conetic is a dark SaaS dashboard aesthetic. This site is a **light** editorial aesthetic. Cream `#f7f5f1` background, Geist Sans for everything (weight 600 on display, 400 on body), editorial blue `<em>` accents at weight 700 (no italic — modern, no cursive). Same glassy/fluid vibe, inverted palette.
 
 ---
 
@@ -94,7 +94,7 @@ A voice note, not a course. A conversation, not instruction. Zach narrates how h
 | Framework | Next.js 16.2.3 (App Router, Turbopack) |
 | React | 19.2.4 |
 | Styling | Tailwind CSS v4 (`@tailwindcss/postcss`) |
-| Fonts | Syne (display, variable) + Urbanist (body + italic, variable), self-hosted via `next/font/local` from `app/fonts/` |
+| Fonts | Geist Sans (single variable family, 100–900), loaded via `next/font/google`. No italic used anywhere — emphasis is weight + color. |
 | Type | TypeScript (strict) |
 | Lint | ESLint + `eslint-config-next` |
 | Deploy | Static marketing page. Any Next.js host (Vercel recommended). |
@@ -284,8 +284,8 @@ Both env vars have safe fallbacks (`"Date TBA"` and `"#"`), so the island render
 | `.glass` | White 72% bg + blur + saturate + inset highlights |
 | `.glass-soft` | Lighter glass, used for secondary cards |
 | `.glass-nav` | Cream 72% bg for fixed header on scroll |
-| `.display` | Syne, 500wt, tight letter-spacing (variable font, 400–800 available) |
-| `.display em` | Urbanist italic in editorial blue (the accent moment — Syne has no italic so we drop to Urbanist-Italic) |
+| `.display` | Geist Sans, 600wt, tight letter-spacing (`-0.035em`) |
+| `.display em` | Geist Sans 700wt in editorial blue. Intentionally NOT italic — weight + color carry the accent. |
 | `.btn-primary` | Near-black button w/ drop shadow, lifts on hover |
 | `.btn-ghost` | Bordered text button |
 | `.flow-text` | Animated gradient text (used on stat numbers) |
@@ -299,9 +299,9 @@ Both env vars have safe fallbacks (`"Date TBA"` and `"#"`), so the island render
 
 ### Typography rules
 
-- **Display headlines** use Syne (geometric display sans, variable weight 400–800)
-- **Italic `<em>` inside a display headline** intentionally drops to Urbanist-Italic in editorial blue. Syne has no italic axis, so leaning on Urbanist's real italic keeps the accent moment honest rather than faux-slanting Syne.
-- **Body + UI** use Urbanist (variable weight 100–900)
+- **Display headlines** use Geist Sans at weight 600, letter-spacing `-0.035em`
+- **`<em>` inside a display headline** uses the same Geist Sans at weight 700 in editorial blue (`--blue`). No italic. Zach explicitly ruled out cursive/italic emphasis — it reads as weight + color, not a slant.
+- **Body + UI** use Geist Sans at weight 400
 - **Eyebrow labels** are always `text-[12px] tracking-[0.22em] uppercase text-[var(--muted)]`
 
 ### The "fluid/glassy" effect is achieved by three stacked layers:
@@ -419,7 +419,8 @@ Every on-page sentence should be derivable from, or directly lifted from, Zach's
 
 - **Don't mix the dark Conetic palette back in.** The glassy effect translates, the dark colors don't. The whole point of this page is it feels premium/editorial, not SaaS-dashboard-y.
 - **Don't add gradient text to every headline.** `.flow-text` is used intentionally on one stat row. Spreading it everywhere cheapens it.
-- **Don't swap Syne or Urbanist without seeing the whole page.** The italic `<em>` moment relies on the pair (Syne has no italic, Urbanist-Italic carries the accent). Breaking one breaks that moment.
+- **Don't reintroduce italic anywhere.** Zach explicitly ruled out cursive/italic emphasis. The `<em>` moment is weight + color (Geist 700 in editorial blue), not a slant. Don't add `font-style: italic` back to `.display em` or to any other display element.
+- **Don't swap Geist without seeing the whole page.** Single family across display and body is load-efficient and looks intentional. A second family breaks the modern sans-only voice.
 - **Don't convert the Stripe Payment Link to an API route without asking.** The link flow is deliberate: it means no secrets in the repo, no webhook infra, no PCI surface. If Zach wants custom fields, order bumps, or tracking, then yes, swap to API.
 - **Don't add marketing/analytics scripts by default.** Zach may want Meta Pixel / TikTok Pixel later, but should explicitly confirm. Those scripts are a privacy/consent surface and should be wired deliberately.
 - **Don't reintroduce em dashes (`—`).** See the voice guide in section 1. Earlier drafts had too many, the user explicitly removed them. Use periods, commas, or middle-dots (`·`) instead.

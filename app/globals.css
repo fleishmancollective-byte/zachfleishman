@@ -83,7 +83,7 @@ html, body {
   overscroll-behavior-x: none;
 }
 body {
-  font-family: var(--font-body), "Urbanist", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, sans-serif;
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Helvetica, sans-serif;
   font-size: 15px;
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
@@ -160,25 +160,24 @@ body::after {
     0 30px 90px -20px rgba(17, 24, 39, 0.22);
 }
 
-/* ─── Editorial display headlines ─── */
-/* Syne is a geometric display sans. It sets the voice for all h1/h2/h3
-   and anything with .display. Weight 500 is the workhorse; variable font
-   gives us 400–800 interpolated. */
+/* ─── Modern display headlines ─── */
+/* Geist is the single family. Display pulls a heavier weight to set it
+   apart from body copy without changing family. Tight tracking gives the
+   headline its editorial density. */
 .display {
-  font-family: var(--font-display), "Syne", Impact, "Helvetica Neue", sans-serif;
-  font-weight: 500;
-  letter-spacing: -0.025em;
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.035em;
   line-height: 1.02;
 }
-/* Italic em inside a display headline is the editorial accent moment.
-   Syne has no italic axis, so we intentionally drop to Urbanist-Italic
-   (a thin-to-medium italic variable) to keep the italic lean. The blue
-   carries the emphasis. */
+/* Em inside a display headline carries the accent in editorial blue.
+   No italic, no cursive — the weight + color do the emphasis work. */
 .display em {
-  font-family: var(--font-body), "Urbanist", Georgia, serif;
-  font-style: italic;
-  font-weight: 500;
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 700;
   color: var(--blue);
+  letter-spacing: -0.03em;
 }
 
 /* ─── Button primitives ─── */

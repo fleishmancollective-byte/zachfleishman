@@ -1,44 +1,23 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Geist } from "next/font/google";
 import "./globals.css";
 
 /**
- * Type system: Syne for display headlines, Urbanist for body + UI chrome.
+ * Type system: Geist Sans, single variable family, weights 100–900.
  *
- * Both are variable fonts shipped locally from app/fonts/. The CSS var names
- * --font-display and --font-body flip the stack in one place (globals.css).
+ * Display headlines pull a heavier weight (600–700); body sits at 400.
+ * Italic is intentionally NOT loaded — the `<em>` editorial accent uses
+ * weight + color instead of a slant. No cursive anywhere.
  *
- * Urbanist ships with a paired italic variable so the italic <em> inside a
- * .display headline renders as real italic (Syne has no italic axis, so the
- * em falls back to Urbanist-Italic for that single editorial accent).
+ * Exposed as two CSS vars so globals.css can bind body and display
+ * separately even though they resolve to the same family:
+ *   --font-body      → body + UI
+ *   --font-display   → .display / h1/h2/h3
  */
 
-const display = localFont({
-  variable: "--font-display",
-  src: [
-    {
-      path: "./fonts/Syne-VariableFont_wght.ttf",
-      style: "normal",
-      weight: "400 800",
-    },
-  ],
-  display: "swap",
-});
-
-const body = localFont({
-  variable: "--font-body",
-  src: [
-    {
-      path: "./fonts/Urbanist-VariableFont_wght.ttf",
-      style: "normal",
-      weight: "100 900",
-    },
-    {
-      path: "./fonts/Urbanist-Italic-VariableFont_wght.ttf",
-      style: "italic",
-      weight: "100 900",
-    },
-  ],
+const geist = Geist({
+  variable: "--font-sans",
+  subsets: ["latin"],
   display: "swap",
 });
 
@@ -72,7 +51,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${body.variable} ${display.variable} h-full antialiased`}>
+    <html lang="en" className={`${geist.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
