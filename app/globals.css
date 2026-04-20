@@ -20,19 +20,31 @@
   --accent: #0b0d12;                     /* primary CTA = near-black */
   --accent-hover: #1a1f2b;
 
-  /* Editorial accent · swapped from gold to deep blue */
-  --blue: #305282;         /* Storm — italic em + secondary accents */
-  --blue-deep: #1e3a6e;    /* Deeper blue for hover / richer moments */
+  /* Accent — lavender/purple per highflyers direction. Keeps blue
+     as a secondary accent for depth. */
+  --lavender: #9a7adc;         /* primary accent — CTA arrow circles, display gradients */
+  --lavender-deep: #7e5bc8;    /* hover / richer moments */
+  --lavender-soft: #c2b0ed;    /* lighter stops in gradients */
 
-  /* Pastel orb tints */
+  --blue: #5b75ba;             /* secondary accent (kept for em fallbacks, stat gradients) */
+  --blue-deep: #3a5496;
+
+  /* Sky + cloud atmosphere */
+  --sky-top: #cbe1f4;
+  --sky-bottom: #f0f5f9;
+
+  /* Warm edge vignette — that peach glow wrapping the page */
+  --vignette: rgba(244, 195, 150, 0.35);
+
+  /* Pastel orb tints (legacy, some components still reference) */
   --peach: #f4cfa1;
   --mint: #b8e0c4;
   --sky: #a9c5f4;
   --lilac: #cab6f0;
 
   /* Legacy aliases so older component references still resolve cleanly */
-  --gold: var(--blue);       /* any lingering `var(--gold)` reads as blue now */
-  --ocean: var(--blue);
+  --gold: var(--lavender);      /* legacy gold refs now read as lavender */
+  --ocean: var(--lavender);
   --cloud: var(--bg-tint);
   --slate: var(--ink);
   --jet: var(--ink);
@@ -92,44 +104,52 @@ body {
   position: relative;
 }
 
-/* ─── Ambient atmosphere ───
-   Deeper, more saturated blue→violet halo centered in the page. Cream
-   still reads as the base color at the edges. Inspired by immersive
-   gradient refs (frosted/dreamy, not pastel). */
+/* ─── Warm edge vignette ───
+   Peach glow wrapping the viewport edges — the highflyers.ai signature
+   frame that makes the whole page feel lit. Sits above content at
+   low opacity; pointer-events-none so it doesn't block clicks. */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   background:
-    /* Warm edge glow */
-    radial-gradient(ellipse 60% 45% at 95% -5%, rgba(244, 207, 161, 0.38) 0%, transparent 55%),
-    /* Violet core */
-    radial-gradient(ellipse 85% 70% at 20% 20%, rgba(154, 122, 220, 0.42) 0%, transparent 55%),
-    /* Deep blue pool */
-    radial-gradient(ellipse 95% 70% at 60% 95%, rgba(91, 117, 186, 0.40) 0%, transparent 60%),
-    /* Soft mint whisper */
-    radial-gradient(ellipse 55% 45% at 100% 85%, rgba(184, 224, 196, 0.28) 0%, transparent 65%);
+    radial-gradient(ellipse 140% 80% at 50% 0%, transparent 50%, var(--vignette) 100%),
+    radial-gradient(ellipse 140% 80% at 50% 100%, transparent 50%, var(--vignette) 100%);
   pointer-events: none;
-  z-index: 0;
-  animation: drift 28s ease-in-out infinite alternate;
-}
-@keyframes drift {
-  0%   { transform: translate3d(0, 0, 0) scale(1); }
-  50%  { transform: translate3d(-2%, 1.5%, 0) scale(1.05); }
-  100% { transform: translate3d(2%, -1.5%, 0) scale(1.03); }
+  z-index: 60;
+  mix-blend-mode: multiply;
+  opacity: 0.85;
 }
 
-/* ─── Subtle paper grain ─── */
+/* ─── Liquid light atmosphere ───
+   Fluid, light-accentuated backdrop. Multiple soft radial gradients in
+   lavender / sky / peach layered and drifting, so the page feels like
+   light refracting through glass — no hard shapes, no photography. */
 body::after {
   content: '';
   position: fixed;
   inset: 0;
-  background-image: radial-gradient(rgba(17, 24, 39, 0.035) 1px, transparent 1px);
-  background-size: 3px 3px;
-  opacity: 0.6;
-  mix-blend-mode: multiply;
+  background:
+    /* Top-left: lavender light pool */
+    radial-gradient(ellipse 70% 55% at 20% 10%, rgba(194, 176, 237, 0.55) 0%, transparent 55%),
+    /* Upper-right: warm peach glow */
+    radial-gradient(ellipse 55% 45% at 90% 15%, rgba(244, 207, 161, 0.45) 0%, transparent 55%),
+    /* Mid-right: cool sky highlight */
+    radial-gradient(ellipse 60% 55% at 95% 55%, rgba(169, 197, 244, 0.42) 0%, transparent 60%),
+    /* Bottom-left: mint wash */
+    radial-gradient(ellipse 65% 50% at 5% 85%, rgba(184, 224, 196, 0.32) 0%, transparent 60%),
+    /* Center luminous bloom */
+    radial-gradient(ellipse 80% 60% at 50% 45%, rgba(255, 255, 255, 0.5) 0%, transparent 60%);
   pointer-events: none;
   z-index: 0;
+  animation: liquid-drift 32s ease-in-out infinite alternate;
+  filter: saturate(110%);
+}
+@keyframes liquid-drift {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  33%  { transform: translate3d(-1.8%, 1.2%, 0) scale(1.04); }
+  66%  { transform: translate3d(1.5%, -0.8%, 0) scale(1.02); }
+  100% { transform: translate3d(-0.5%, 0.8%, 0) scale(1.05); }
 }
 
 /* ─── Glass panels ─── */
@@ -155,18 +175,18 @@ body::after {
   -webkit-backdrop-filter: blur(14px) saturate(160%);
   border-bottom: 1px solid var(--border);
 }
-/* Bright paper card — for Pricing + FinalCTA. More premium shadow layering
-   and a brighter top edge so it feels lit from above. */
+/* Bright frosted card — Pricing + FinalCTA. More translucent so the
+   atmospheric bg reads through the card (highflyers-style). */
 .glass-bright {
-  background: rgba(255, 255, 255, 0.82);
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(26px) saturate(160%);
-  -webkit-backdrop-filter: blur(26px) saturate(160%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.62) 0%, rgba(255, 255, 255, 0.38) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(32px) saturate(170%);
+  -webkit-backdrop-filter: blur(32px) saturate(170%);
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 1) inset,
     0 -1px 0 rgba(17, 24, 39, 0.04) inset,
-    0 40px 120px -30px rgba(30, 58, 110, 0.28),
-    0 12px 30px -12px rgba(17, 24, 39, 0.18);
+    0 40px 120px -30px rgba(154, 122, 220, 0.32),
+    0 12px 30px -12px rgba(17, 24, 39, 0.14);
 }
 
 /* Cinematic glass — deeper, more dimensional card for hero / marquee
@@ -262,14 +282,19 @@ body::after {
   letter-spacing: -0.035em;
   line-height: 1.02;
 }
-/* Em inside a display headline carries the accent in editorial blue.
-   No italic, no cursive — the weight + color do the emphasis work. */
+/* Em inside a display headline carries the accent. Lavender→blue
+   gradient text per highflyers. No italic, no cursive. */
 .display em {
   font-family: inherit;
   font-style: normal;
   font-weight: 700;
-  color: var(--blue);
   letter-spacing: -0.03em;
+  background: linear-gradient(110deg, var(--lavender) 0%, var(--blue) 50%, var(--lavender-deep) 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: flow 12s ease-in-out infinite;
 }
 
 /* ─── Button primitives ─── */
@@ -316,6 +341,64 @@ body::after {
 .btn-ghost:hover {
   background: var(--surface-2);
   border-color: var(--ink-soft);
+}
+
+/* Glass CTA pill with trailing lavender arrow circle — the highflyers
+   signature button. Text sits left, big lavender gradient circle with
+   arrow sits flush-right. Pairs with .glass-pill stack. */
+.btn-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 6px 6px 22px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.58) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(22px) saturate(180%);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 1) inset,
+    0 20px 48px -14px rgba(154, 122, 220, 0.35),
+    0 4px 14px -4px rgba(17, 24, 39, 0.1);
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.25s cubic-bezier(.22,1,.36,1), box-shadow 0.25s;
+}
+.btn-arrow:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 1) inset,
+    0 28px 60px -14px rgba(154, 122, 220, 0.5),
+    0 6px 18px -4px rgba(17, 24, 39, 0.14);
+}
+.btn-arrow > .arrow-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #fbf9f6;
+  background: linear-gradient(135deg, var(--lavender-soft) 0%, var(--lavender) 45%, var(--lavender-deep) 100%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.55) inset,
+    0 8px 20px -6px rgba(126, 91, 200, 0.6);
+  flex: 0 0 auto;
+  transition: transform 0.25s cubic-bezier(.22,1,.36,1);
+}
+.btn-arrow:hover > .arrow-circle {
+  transform: translateX(2px);
+}
+.btn-arrow.lg {
+  padding: 8px 8px 8px 26px;
+  font-size: 15px;
+}
+.btn-arrow.lg > .arrow-circle {
+  width: 44px;
+  height: 44px;
 }
 
 /* ─── Flowing gradient accent text ─── */
