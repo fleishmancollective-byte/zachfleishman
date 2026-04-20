@@ -92,24 +92,31 @@ body {
   position: relative;
 }
 
-/* ─── Ambient drifting pastel orbs (behind content) ─── */
+/* ─── Ambient atmosphere ───
+   Deeper, more saturated blue→violet halo centered in the page. Cream
+   still reads as the base color at the edges. Inspired by immersive
+   gradient refs (frosted/dreamy, not pastel). */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(ellipse 90% 55% at 15% -10%, rgba(202, 182, 240, 0.45) 0%, transparent 60%),
-    radial-gradient(ellipse 80% 50% at 95% 10%, rgba(244, 207, 161, 0.42) 0%, transparent 60%),
-    radial-gradient(ellipse 95% 60% at 50% 105%, rgba(169, 197, 244, 0.35) 0%, transparent 65%),
-    radial-gradient(ellipse 70% 45% at 0% 75%, rgba(184, 224, 196, 0.3) 0%, transparent 65%);
+    /* Warm edge glow */
+    radial-gradient(ellipse 60% 45% at 95% -5%, rgba(244, 207, 161, 0.38) 0%, transparent 55%),
+    /* Violet core */
+    radial-gradient(ellipse 85% 70% at 20% 20%, rgba(154, 122, 220, 0.42) 0%, transparent 55%),
+    /* Deep blue pool */
+    radial-gradient(ellipse 95% 70% at 60% 95%, rgba(91, 117, 186, 0.40) 0%, transparent 60%),
+    /* Soft mint whisper */
+    radial-gradient(ellipse 55% 45% at 100% 85%, rgba(184, 224, 196, 0.28) 0%, transparent 65%);
   pointer-events: none;
   z-index: 0;
-  animation: drift 22s ease-in-out infinite alternate;
+  animation: drift 28s ease-in-out infinite alternate;
 }
 @keyframes drift {
   0%   { transform: translate3d(0, 0, 0) scale(1); }
-  50%  { transform: translate3d(-1.5%, 1%, 0) scale(1.04); }
-  100% { transform: translate3d(1.5%, -1%, 0) scale(1.02); }
+  50%  { transform: translate3d(-2%, 1.5%, 0) scale(1.05); }
+  100% { transform: translate3d(2%, -1.5%, 0) scale(1.03); }
 }
 
 /* ─── Subtle paper grain ─── */
@@ -148,16 +155,101 @@ body::after {
   -webkit-backdrop-filter: blur(14px) saturate(160%);
   border-bottom: 1px solid var(--border);
 }
-/* Bright paper card is still available for Pricing + FinalCTA (these already
-   are white/cream on white/cream so they don't need variable shadowing here) */
+/* Bright paper card — for Pricing + FinalCTA. More premium shadow layering
+   and a brighter top edge so it feels lit from above. */
 .glass-bright {
-  background: rgba(255, 255, 255, 0.88);
-  border: 1px solid rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(22px) saturate(150%);
-  -webkit-backdrop-filter: blur(22px) saturate(150%);
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(26px) saturate(160%);
+  -webkit-backdrop-filter: blur(26px) saturate(160%);
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 1) inset,
-    0 30px 90px -20px rgba(17, 24, 39, 0.22);
+    0 -1px 0 rgba(17, 24, 39, 0.04) inset,
+    0 40px 120px -30px rgba(30, 58, 110, 0.28),
+    0 12px 30px -12px rgba(17, 24, 39, 0.18);
+}
+
+/* Cinematic glass — deeper, more dimensional card for hero / marquee
+   moments. Sits on top of ambient gradient and picks up the blue bleed. */
+.glass-deep {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.55) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(32px) saturate(170%);
+  -webkit-backdrop-filter: blur(32px) saturate(170%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 1) inset,
+    0 0 0 1px rgba(255, 255, 255, 0.3) inset,
+    0 50px 140px -30px rgba(30, 58, 110, 0.35),
+    0 18px 50px -18px rgba(17, 24, 39, 0.22);
+}
+
+/* ─── Floating glass elements ───
+   Dynamic, futuristic floating shapes that breathe. Used for decorative
+   accents (price pills, stat badges, ambient orbs) scattered around the
+   hero and section boundaries. Animation: slow, vertical float + subtle
+   scale so they feel alive, not static. */
+
+@keyframes float-slow {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  50%  { transform: translate3d(0, -12px, 0) scale(1.02); }
+  100% { transform: translate3d(0, 0, 0) scale(1); }
+}
+@keyframes float-slower {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  50%  { transform: translate3d(4px, -18px, 0) scale(1.03); }
+  100% { transform: translate3d(0, 0, 0) scale(1); }
+}
+@keyframes breathe {
+  0%   { opacity: 0.55; filter: blur(60px); }
+  50%  { opacity: 0.75; filter: blur(70px); }
+  100% { opacity: 0.55; filter: blur(60px); }
+}
+
+.float        { animation: float-slow 8s ease-in-out infinite; }
+.float-delay  { animation-delay: -2s; }
+.float-slow   { animation: float-slower 11s ease-in-out infinite; }
+.breathe-orb  { animation: breathe 9s ease-in-out infinite, orb-float 14s ease-in-out infinite alternate; }
+
+/* Floating glass pill — decorative label badge that hovers in the
+   composition. Stronger saturation than .glass-soft so it reads as a
+   distinct floating object, not a background element. */
+.glass-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.5) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 1) inset,
+    0 18px 40px -12px rgba(30, 58, 110, 0.28),
+    0 4px 12px -4px rgba(17, 24, 39, 0.08);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Floating glass blob — soft, fluid, slightly iridescent. For decorative
+   accent shapes around the hero. Not a text container; a presence. */
+.glass-blob {
+  position: absolute;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.15) 50%, transparent 80%),
+    linear-gradient(135deg, rgba(154, 122, 220, 0.25) 0%, rgba(91, 117, 186, 0.18) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 40px 90px -30px rgba(30, 58, 110, 0.35);
+  pointer-events: none;
 }
 
 /* ─── Modern display headlines ─── */

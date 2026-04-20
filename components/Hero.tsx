@@ -5,27 +5,33 @@ const checkoutHref =
 
 export default function Hero() {
   return (
-    <section id="top" className="relative pt-32 pb-20 sm:pt-40 sm:pb-28 px-6 overflow-hidden">
-      {/* Fluid pastel orbs */}
+    <section
+      id="top"
+      className="relative pt-28 pb-20 sm:pt-36 sm:pb-28 px-5 sm:px-6 overflow-hidden"
+    >
+      {/* Atmospheric halos — breathing, not just drifting. The blue/violet
+          is the primary light source; the peach warms the top-right. */}
       <div
-        className="orb"
+        className="orb breathe-orb"
         style={{
-          width: 520,
-          height: 520,
-          top: -180,
-          left: -120,
-          background: "radial-gradient(circle, #cab6f0 0%, transparent 70%)",
+          width: 720,
+          height: 720,
+          top: -200,
+          left: "50%",
+          transform: "translateX(-50%)",
+          background:
+            "radial-gradient(circle, rgba(154, 122, 220, 0.55) 0%, rgba(91, 117, 186, 0.28) 45%, transparent 72%)",
         }}
       />
       <div
         className="orb"
         style={{
-          width: 460,
-          height: 460,
-          top: -100,
-          right: -160,
-          background: "radial-gradient(circle, #f4cfa1 0%, transparent 70%)",
-          animationDelay: "2s",
+          width: 420,
+          height: 420,
+          top: 40,
+          right: -120,
+          background: "radial-gradient(circle, rgba(244, 207, 161, 0.5) 0%, transparent 70%)",
+          animationDelay: "3s",
         }}
       />
       <div
@@ -33,33 +39,77 @@ export default function Hero() {
         style={{
           width: 380,
           height: 380,
-          bottom: -200,
-          left: "30%",
-          background: "radial-gradient(circle, #a9c5f4 0%, transparent 70%)",
-          animationDelay: "4s",
+          bottom: -160,
+          left: -140,
+          background: "radial-gradient(circle, rgba(169, 197, 244, 0.45) 0%, transparent 70%)",
+          animationDelay: "5s",
         }}
       />
 
-      <div className="relative max-w-4xl mx-auto text-center flex flex-col items-center">
-        {/* Eyebrow */}
-        <div className="fade-up inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-soft text-[12px] tracking-wide uppercase text-[var(--ink-soft)] font-medium mb-8">
-          <span className="w-1.5 h-1.5 rounded-full bg-[var(--cloud)]" />
-          A voice note · Not a course · $47
+      {/* Floating glass decorative blobs — soft, dimensional, alive */}
+      <div
+        className="glass-blob float hidden sm:block"
+        style={{ width: 110, height: 110, top: "18%", left: "6%" }}
+      />
+      <div
+        className="glass-blob float float-delay hidden sm:block"
+        style={{
+          width: 78,
+          height: 78,
+          top: "14%",
+          right: "8%",
+          background:
+            "radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.15) 50%, transparent 80%), linear-gradient(135deg, rgba(244, 207, 161, 0.3) 0%, rgba(154, 122, 220, 0.18) 100%)",
+        }}
+      />
+      <div
+        className="glass-blob float-slow hidden md:block"
+        style={{
+          width: 64,
+          height: 64,
+          bottom: "20%",
+          right: "12%",
+          background:
+            "radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.15) 50%, transparent 80%), linear-gradient(135deg, rgba(169, 197, 244, 0.35) 0%, rgba(184, 224, 196, 0.22) 100%)",
+        }}
+      />
+
+      <div className="relative z-10 max-w-4xl mx-auto text-center flex flex-col items-center">
+        {/* Eyebrow — floating glass pill */}
+        <div className="fade-up float mb-10">
+          <span className="glass-pill">
+            <span className="w-1.5 h-1.5 rounded-full bg-[var(--blue)]" />
+            A voice note · Not a course · $47
+          </span>
         </div>
 
         {/* Headline */}
-        <h1 className="display fade-up d1 text-[48px] sm:text-[68px] md:text-[80px] leading-[0.98] mb-6 max-w-[22ch]">
+        <h1 className="display fade-up d1 text-[44px] sm:text-[68px] md:text-[84px] leading-[0.98] mb-6 max-w-[22ch]">
           A voice note to my younger self, <em>made public</em>.
         </h1>
 
         {/* Subhead */}
-        <p className="fade-up d2 text-[17px] sm:text-[19px] text-[var(--muted)] max-w-[58ch] leading-[1.55] mb-10">
+        <p className="fade-up d2 text-[16px] sm:text-[19px] text-[var(--muted)] max-w-[56ch] leading-[1.6] mb-12">
           Live monthly Q&As with me. Ten short conversations. The Starting Line Playbook.
-          A door into the room with everyone else figuring it out. That's the whole thing.
+          A door into the room with everyone else figuring it out. That&apos;s the whole thing.
         </p>
 
-        {/* VSL */}
-        <div className="fade-up d3 w-full max-w-3xl mx-auto mb-10">
+        {/* VSL with floating badge accents around it */}
+        <div className="fade-up d3 w-full max-w-3xl mx-auto mb-10 relative">
+          {/* Floating "10 conversations" badge, top-left */}
+          <div className="hidden sm:block absolute -left-6 -top-5 z-20 float">
+            <span className="glass-pill">
+              <span className="display text-[14px] text-[var(--blue)] leading-none">10</span>
+              Short conversations
+            </span>
+          </div>
+          {/* Floating "Under an hour" badge, bottom-right */}
+          <div className="hidden sm:block absolute -right-4 -bottom-4 z-20 float float-delay">
+            <span className="glass-pill">
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--blue)]" />
+              Under an hour, total
+            </span>
+          </div>
           <VSL />
         </div>
 
@@ -78,21 +128,21 @@ export default function Hero() {
             </svg>
           </a>
           <a href="#inside" className="btn-ghost">
-            See what's inside
+            See what&apos;s inside
           </a>
         </div>
 
         {/* Micro-proof */}
-        <div className="fade-up d5 mt-8 flex items-center gap-4 text-[13px] text-[var(--muted)]">
+        <div className="fade-up d5 mt-10 flex items-center gap-4 text-[12.5px] text-[var(--muted)]">
           <div className="flex -space-x-2">
             {[0, 1, 2, 3].map((i) => (
               <div
                 key={i}
-                className="w-7 h-7 rounded-full border-2 border-[var(--bg)]"
+                className="w-6 h-6 rounded-full border-2 border-[var(--bg)]"
                 style={{
                   background: `linear-gradient(135deg, ${
-                    ["#f4cfa1", "#cab6f0", "#a9c5f4", "#b8e0c4"][i]
-                  }, #ffffff)`,
+                    ["#9a7adc", "#5b75ba", "#a9c5f4", "#b8e0c4"][i]
+                  }, rgba(255,255,255,0.6))`,
                 }}
               />
             ))}
