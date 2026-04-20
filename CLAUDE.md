@@ -109,9 +109,18 @@ Dev port is **3002** (`npm run dev`).
 /
 ├── app/
 │   ├── layout.tsx         # Fonts, metadata (OG/Twitter), html+body shell
-│   ├── page.tsx           # Composes all sections in order
+│   ├── page.tsx           # Landing page — composes all sections in order
 │   ├── globals.css        # Theme tokens, glass utilities, animations
-│   └── favicon.ico
+│   ├── favicon.ico
+│   ├── login/
+│   │   ├── page.tsx       # Server component. Auto-redirects to /dashboard if authed.
+│   │   ├── LoginForm.tsx  # Client component. useActionState + error UX.
+│   │   └── actions.ts     # Server action: timing-safe password check + cookie set.
+│   ├── dashboard/
+│   │   └── page.tsx       # Cookie-protected. Placeholder for Tab 1/Tab 2 content.
+│   └── api/
+│       └── logout/
+│           └── route.ts   # GET + POST. Clears cookie, redirects to /.
 │
 ├── components/            # All section components (one file each)
 │   ├── Nav.tsx            # Fixed nav, gains glass-nav bg on scroll
@@ -142,16 +151,52 @@ Dev port is **3002** (`npm run dev`).
 
 ## 5. Environment variables
 
-Both are optional. Both are `NEXT_PUBLIC_*` so they're inlined at build time.
+| Variable | What it does | Exposed to client? | Fallback |
+|---|---|---|---|
+| `NEXT_PUBLIC_STRIPE_PAYMENT_LINK` | The `https://buy.stripe.com/...` URL. All CTA buttons link to it. | Yes (NEXT_PUBLIC_) | `#pricing` (scroll to pricing section) |
+| `NEXT_PUBLIC_VSL_EMBED_URL` | Iframe `src` for Wistia/Vidalytics/YouTube/Vimeo embed | Yes (NEXT_PUBLIC_) | Placeholder video card |
+| `ACCESS_PASSWORD` | Shared password gating `/dashboard`. All buyers get the same one. | **No — server-only** | No fallback. Misconfigured → all logins rejected, error logged server-side. |
 
-| Variable | What it does | Fallback |
-|---|---|---|
-| `NEXT_PUBLIC_STRIPE_PAYMENT_LINK` | The `https://buy.stripe.com/...` URL. All 4 CTA buttons link to it. | `#pricing` (scroll to pricing section) |
-| `NEXT_PUBLIC_VSL_EMBED_URL` | Iframe `src` for Wistia/Vidalytics/YouTube/Vimeo embed | Renders a branded placeholder with a pulsing play button |
-
-**To ship**: copy `.env.local.example` → `.env.local` and fill both.
+**To ship**: copy `.env.local.example` → `.env.local` and fill all three.
 
 Payment is handled entirely by Stripe's hosted checkout. There's no API route, no webhook, no order DB. If the user later needs order tracking or fulfillment, switch to Stripe Checkout via API (new route handler in `app/api/checkout/route.ts`).
+
+---
+
+## 5a. Auth / gated access
+
+Added in the April 2026 pass. Simple shared-password gate for buyers.
+
+**Routes**
+| Route | Type | Purpose |
+|---|---|---|
+| [/login](app/login/page.tsx) | Server Component + Client form | Password entry. Auto-redirects to `/dashboard` if already authed. |
+| [/dashboard](app/dashboard/page.tsx) | Server Component | Protected. Redirects to `/login` if cookie missing. Placeholder content, full dashboard is a follow-up pass. |
+| [/api/logout](app/api/logout/route.ts) | Route Handler (GET + POST) | Clears cookie, redirects to `/`. |
+
+**Auth flow**
+1. User submits `/login` form → fires server action [loginAction](app/login/actions.ts).
+2. Action compares the submitted password to `process.env.ACCESS_PASSWORD` using `crypto.timingSafeEqual` (constant-time, avoids timing-based leaks).
+3. On match: sets cookie `zts_access=granted`, `HttpOnly`, `SameSite=Lax`, `Secure` in production, `Path=/`, 30-day `maxAge`. Then `redirect('/dashboard')`.
+4. On mismatch: returns `{ error: true }` to the form. `LoginForm` re-renders with a muted error message and wipes the input via `useEffect` + `inputRef`. **No redirect.**
+
+**Guard pattern on protected pages**
+```tsx
+const cookieStore = await cookies();          // note: cookies() is async in Next 16
+if (cookieStore.get("zts_access")?.value !== "granted") redirect("/login");
+```
+
+**Why a server action (not a client fetch + route handler)**
+- Password never leaves the server bundle.
+- No JSON endpoint anyone can brute-force from the browser console.
+- Native form progressive enhancement (works without JS).
+- `useActionState` gives pending + error state for free.
+
+**Cookie name is `zts_access`** — short for "Zero to Six access." If you change the name, change it in all four files: `login/actions.ts`, `login/page.tsx`, `dashboard/page.tsx`, `api/logout/route.ts`.
+
+**Rotating the password**: change `ACCESS_PASSWORD` in Vercel env vars, redeploy, and send buyers the new password. Existing sessions (cookies) remain valid until expiration — if you need to kill all sessions, also change the cookie name.
+
+**Nav integration.** The landing page `Nav` has a subtle `Log in` text link next to the primary CTA (hidden on very narrow viewports via `hidden sm:inline`).
 
 ---
 

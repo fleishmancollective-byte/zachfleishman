@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const checkoutHref =
@@ -46,12 +47,20 @@ export default function Nav() {
           </a>
         </nav>
 
-        <a
-          href={checkoutHref}
-          className="btn-primary !py-2.5 !px-4 !text-[13.5px]"
-        >
-          Press play · $47
-        </a>
+        <div className="flex items-center gap-4 sm:gap-5">
+          <Link
+            href="/login"
+            className="text-[13.5px] text-[var(--muted)] hover:text-[var(--ink)] transition-colors hidden sm:inline"
+          >
+            Log in
+          </Link>
+          <a
+            href={checkoutHref}
+            className="btn-primary !py-2.5 !px-4 !text-[13.5px]"
+          >
+            Press play · $47
+          </a>
+        </div>
       </div>
     </header>
   );
