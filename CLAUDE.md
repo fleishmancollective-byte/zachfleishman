@@ -117,7 +117,15 @@ Dev port is **3002** (`npm run dev`).
 │   │   ├── LoginForm.tsx  # Client component. useActionState + error UX.
 │   │   └── actions.ts     # Server action: timing-safe password check + cookie set.
 │   ├── dashboard/
-│   │   └── page.tsx       # Cookie-protected. Placeholder for Tab 1/Tab 2 content.
+│   │   ├── page.tsx          # Cookie-protected shell. Header + <DashboardClient />.
+│   │   ├── DashboardClient.tsx  # Client root. Holds watched state + modal state.
+│   │   ├── data.ts              # products[] array: videos + resources per product.
+│   │   ├── useWatched.ts        # localStorage hook (zts_watched_videos).
+│   │   ├── ProgressStrip.tsx    # Top "X / Y watched" bar.
+│   │   ├── ProductSection.tsx   # Accordion per product (one now, more later).
+│   │   ├── VideoRow.tsx         # Individual video in the accordion body.
+│   │   ├── VideoModal.tsx       # Wistia iframe modal + "Mark as watched".
+│   │   └── CommunityIsland.tsx  # Floating bottom-right Room island.
 │   └── api/
 │       └── logout/
 │           └── route.ts   # GET + POST. Clears cookie, redirects to /.
@@ -156,6 +164,8 @@ Dev port is **3002** (`npm run dev`).
 | `NEXT_PUBLIC_STRIPE_PAYMENT_LINK` | The `https://buy.stripe.com/...` URL. All CTA buttons link to it. | Yes (NEXT_PUBLIC_) | `#pricing` (scroll to pricing section) |
 | `NEXT_PUBLIC_VSL_EMBED_URL` | Iframe `src` for Wistia/Vidalytics/YouTube/Vimeo embed | Yes (NEXT_PUBLIC_) | Placeholder video card |
 | `ACCESS_PASSWORD` | Shared password gating `/dashboard`. All buyers get the same one. | **No — server-only** | No fallback. Misconfigured → all logins rejected, error logged server-side. |
+| `NEXT_PUBLIC_COMMUNITY_URL` | URL the dashboard's Community Island button opens (Discord/Circle/Whop/Skool link) | Yes | `#` (button is inert) |
+| `NEXT_PUBLIC_NEXT_QA_DATE` | Human-readable date of the next live Q&A, shown inside the Community Island | Yes | `"Date TBA"` |
 
 **To ship**: copy `.env.local.example` → `.env.local` and fill all three.
 
@@ -197,6 +207,53 @@ if (cookieStore.get("zts_access")?.value !== "granted") redirect("/login");
 **Rotating the password**: change `ACCESS_PASSWORD` in Vercel env vars, redeploy, and send buyers the new password. Existing sessions (cookies) remain valid until expiration — if you need to kill all sessions, also change the cookie name.
 
 **Nav integration.** The landing page `Nav` has a subtle `Log in` text link next to the primary CTA (hidden on very narrow viewports via `hidden sm:inline`).
+
+---
+
+## 5b. Dashboard (the gated experience)
+
+Added April 2026 alongside the auth. Protected by the same `zts_access` cookie.
+
+**Core idea.** One scrollable page. Each product is an accordion (default expanded for the first one). Inside each accordion: a list of videos + a list of included resources. No separate routes per tab. Designed to hold multiple products in the future, not just Zero to Six.
+
+**Data model is static** in [app/dashboard/data.ts](app/dashboard/data.ts):
+```ts
+products: Product[]
+  └── videos: Video[] { id, num, title, duration, description, wistiaId? }
+  └── resources: Resource[] { id, title, description, href? }
+```
+When a new product launches, add another entry to the `products` array. That's it. The UI scales automatically.
+
+**Video playback.** Each video row opens a modal ([VideoModal.tsx](app/dashboard/VideoModal.tsx)) that renders a Wistia iframe: `https://fast.wistia.net/embed/iframe/{wistiaId}`. If `wistiaId` is empty, the modal shows "Uploading soon." **Action required: fill `wistiaId` for each video in `data.ts` once the real videos are uploaded to Wistia.**
+
+**Watched tracking.** Client-only, localStorage. Key: `zts_watched_videos`, value: JSON-stringified array of video IDs. No backend. Clearing browser data resets. Future upgrade path: persist to a database if/when there's a user system beyond the shared password. See [useWatched.ts](app/dashboard/useWatched.ts).
+
+**How a video gets marked watched.**
+1. User clicks the circle on the row → manual toggle (also allows un-marking).
+2. User clicks the row → modal opens → clicks "Mark as watched" inside the modal.
+3. **Future enhancement:** auto-mark when Wistia fires `end` (requires loading `https://fast.wistia.com/assets/external/E-v1.js` globally and wiring `_wq.push({ id, onReady: v => v.bind("end", ...) })`). Not done yet. Manual tracking is good enough for MVP.
+
+**Gamification.**
+- Global `<ProgressStrip>` at top: X / Y watched with a gradient progress bar.
+- Per-product chip in the accordion header: "Progress · 3 / 11" and a "Complete" pill when fully watched.
+- Watched rows dim the text (de-emphasize what's done, emphasize what's next).
+- Gold fill on the watched-circle is the single visual reward.
+
+**Community Island** ([CommunityIsland.tsx](app/dashboard/CommunityIsland.tsx)) is a floating bottom-right glass card, collapsed into a pill by default. Clicking expands it into a card with:
+- Next Q&A date (from `NEXT_PUBLIC_NEXT_QA_DATE`)
+- "Open the room" button (to `NEXT_PUBLIC_COMMUNITY_URL`)
+
+Both env vars have safe fallbacks (`"Date TBA"` and `"#"`), so the island renders fine before they're set.
+
+**Adding a new product later.**
+1. Append a new `Product` to `products` in [data.ts](app/dashboard/data.ts). Videos get unique IDs (prefix them so they don't collide with `z2s-*`).
+2. That's it. `DashboardClient` already iterates `products` and adds an accordion per entry.
+
+**Things the dashboard intentionally does NOT have (yet).**
+- Per-user accounts / per-user progress. Everyone uses the shared password. Watched state is per-device.
+- Server-side video view tracking. Wistia has its own analytics, that's enough for now.
+- Ratings, comments, threading. Community lives in The Room (external platform), not on-site.
+- Resume-where-you-left-off. Click any video to open the modal. Browser can autoplay.
 
 ---
 
