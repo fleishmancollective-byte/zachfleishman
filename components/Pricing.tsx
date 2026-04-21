@@ -12,7 +12,7 @@ const includes = [
 
 export default function Pricing() {
   return (
-    <section id="pricing" className="relative px-5 sm:px-6 py-20 sm:py-32 overflow-hidden">
+    <section id="pricing" className="relative px-6 py-24 sm:py-32">
       {/* Fluid accent */}
       <div
         className="orb"
@@ -40,14 +40,14 @@ export default function Pricing() {
           </p>
         </div>
 
-        <div className="animate-on-scroll liquid-border rounded-[22px] p-6 sm:p-12 relative overflow-hidden">
-          {/* Subtle mid accent */}
+        <div className="animate-on-scroll glass rounded-[22px] p-8 sm:p-12 relative overflow-hidden">
+          {/* Gold accent */}
           <div
-            className="absolute -top-20 -right-20 w-72 h-72 rounded-full opacity-40"
+            className="absolute -top-16 -right-16 w-64 h-64 rounded-full opacity-50"
             style={{
               background:
-                "radial-gradient(circle, #305282 0%, transparent 70%)",
-              filter: "blur(50px)",
+                "radial-gradient(circle, #c9a063 0%, transparent 70%)",
+              filter: "blur(40px)",
             }}
           />
 
@@ -74,7 +74,7 @@ export default function Pricing() {
                 className="px-3 py-1.5 rounded-full text-[11px] tracking-[0.18em] uppercase font-semibold"
                 style={{
                   background:
-                    "linear-gradient(135deg, #bfd8ee 0%, #6fa8de 50%, #4685c4 100%)",
+                    "linear-gradient(135deg, #f4cfa1 0%, #c9a063 100%)",
                   color: "#0b0d12",
                 }}
               >
@@ -89,14 +89,14 @@ export default function Pricing() {
                     className="mt-[5px] w-4 h-4 rounded-full grid place-items-center shrink-0"
                     style={{
                       background:
-                        "linear-gradient(135deg, #bfd8ee 0%, #6fa8de 50%, #4685c4 100%)",
+                        "linear-gradient(135deg, #0b0d12 0%, #1a1f2b 100%)",
                     }}
                   >
                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden>
                       <path
                         d="M2 5.2L4 7.2L8.5 2.7"
                         stroke="#fbf9f6"
-                        strokeWidth="1.8"
+                        strokeWidth="1.6"
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       />

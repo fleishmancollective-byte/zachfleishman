@@ -34,7 +34,7 @@ export default function VideoModal({
   if (!video) return null;
 
   const embedUrl = video.wistiaId
-    ? `https://fast.wistia.net/embed/iframe/${video.wistiaId}?videoFoam=true&playerColor=1a2b4a`
+    ? `https://fast.wistia.net/embed/iframe/${video.wistiaId}?videoFoam=true&playerColor=0b0d12`
     : null;
 
   return (
@@ -46,18 +46,18 @@ export default function VideoModal({
       onClick={onClose}
     >
       {/* Scrim */}
-      <div className="absolute inset-0 bg-[rgba(26,43,74,0.55)] backdrop-blur-md" />
+      <div className="absolute inset-0 bg-[rgba(11,13,18,0.55)] backdrop-blur-md" />
 
       {/* Dialog */}
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-4xl liquid-border rounded-[18px] p-5 sm:p-7 animate-[fadeUp_0.25s_ease-out]"
+        className="relative w-full max-w-4xl glass rounded-[18px] p-5 sm:p-7 animate-[fadeUp_0.25s_ease-out]"
       >
         {/* Header */}
         <div className="flex items-start justify-between gap-4 mb-4">
           <div className="min-w-0">
             <div className="flex items-center gap-2 text-[11px] tracking-[0.22em] uppercase text-[var(--muted-2)] mb-1.5">
-              <span className="display text-[15px] text-[var(--ocean)] leading-none tracking-normal normal-case">
+              <span className="display text-[15px] text-[var(--gold)] leading-none tracking-normal normal-case">
                 {video.num}
               </span>
               <span>·</span>
@@ -115,13 +115,13 @@ export default function VideoModal({
               <span
                 className="w-4 h-4 rounded-full grid place-items-center"
                 style={{
-                  background: "linear-gradient(135deg, #bfd8ee 0%, #6fa8de 50%, #4685c4 100%)",
+                  background: "linear-gradient(135deg, #f4cfa1 0%, #c9a063 100%)",
                 }}
               >
                 <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden>
                   <path
                     d="M2 5.2L4 7.2L8.5 2.7"
-                    stroke="#fbf9f6"
+                    stroke="#0b0d12"
                     strokeWidth="1.8"
                     strokeLinecap="round"
                     strokeLinejoin="round"

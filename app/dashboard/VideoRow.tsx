@@ -17,8 +17,10 @@ export default function VideoRow({
 }: Props) {
   return (
     <div
-      className={`group relative flex items-start gap-3 sm:gap-5 px-4 sm:px-6 py-4 sm:py-5 rounded-[var(--r2)] cursor-pointer liquid-border ${
-        isWatched ? "opacity-75" : ""
+      className={`group relative flex items-start gap-4 sm:gap-5 px-5 sm:px-6 py-4 sm:py-5 rounded-[var(--r2)] transition-all cursor-pointer border ${
+        isWatched
+          ? "bg-white/40 border-[var(--border)]"
+          : "bg-white/60 border-[var(--border-strong)] hover:bg-white/80 hover:shadow-md"
       }`}
       onClick={onPlay}
       role="button"
@@ -43,8 +45,7 @@ export default function VideoRow({
           isWatched
             ? {
                 background:
-                  "linear-gradient(135deg, #bfd8ee 0%, #6fa8de 50%, #4685c4 100%)",
-                boxShadow: "0 4px 10px -3px rgba(70, 133, 196, 0.5)",
+                  "linear-gradient(135deg, #f4cfa1 0%, #c9a063 100%)",
               }
             : {
                 background: "transparent",
@@ -56,7 +57,7 @@ export default function VideoRow({
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden>
             <path
               d="M2.5 6.2L5 8.5L9.5 3.5"
-              stroke="#fbf9f6"
+              stroke="#0b0d12"
               strokeWidth="1.8"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -66,7 +67,7 @@ export default function VideoRow({
       </button>
 
       {/* Number */}
-      <span className="display text-[22px] sm:text-[28px] text-[var(--ocean)] leading-none shrink-0 w-[28px] sm:w-[40px] mt-0.5">
+      <span className="display text-[26px] sm:text-[28px] text-[var(--gold)] leading-none shrink-0 w-[40px] mt-0.5">
         {video.num}
       </span>
 
@@ -93,8 +94,8 @@ export default function VideoRow({
         </p>
       </div>
 
-      {/* Play indicator (right side, appears on hover — desktop only) */}
-      <div className="hidden sm:block shrink-0 self-center opacity-0 group-hover:opacity-100 transition-opacity">
+      {/* Play indicator (right side, appears on hover) */}
+      <div className="shrink-0 self-center opacity-0 group-hover:opacity-100 transition-opacity">
         <div className="w-8 h-8 rounded-full bg-[var(--ink)] text-[var(--bg)] grid place-items-center">
           <svg width="10" height="12" viewBox="0 0 10 12" fill="none" aria-hidden>
             <path d="M1 1v10l8-5-8-5z" fill="currentColor" />

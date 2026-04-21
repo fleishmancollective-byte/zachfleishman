@@ -5,87 +5,99 @@ const checkoutHref =
 
 export default function Hero() {
   return (
-    <section
-      id="top"
-      className="relative pt-28 pb-24 sm:pt-36 sm:pb-32 px-5 sm:px-6 overflow-hidden"
-    >
-      {/* Very subtle sky glow behind the headline. Clean. */}
+    <section id="top" className="relative pt-32 pb-20 sm:pt-40 sm:pb-28 px-6 overflow-hidden">
+      {/* Fluid orbs */}
       <div
-        className="absolute left-1/2 top-[25%] -translate-x-1/2 w-[560px] h-[560px] rounded-full pointer-events-none"
+        className="orb"
         style={{
-          background:
-            "radial-gradient(circle, rgba(191, 216, 238, 0.3) 0%, transparent 65%)",
-          zIndex: 1,
+          width: 520,
+          height: 520,
+          top: -180,
+          left: -120,
+          background: "radial-gradient(circle, #cab6f0 0%, transparent 70%)",
+        }}
+      />
+      <div
+        className="orb"
+        style={{
+          width: 460,
+          height: 460,
+          top: -100,
+          right: -160,
+          background: "radial-gradient(circle, #f4cfa1 0%, transparent 70%)",
+          animationDelay: "2s",
+        }}
+      />
+      <div
+        className="orb"
+        style={{
+          width: 380,
+          height: 380,
+          bottom: -200,
+          left: "30%",
+          background: "radial-gradient(circle, #a9c5f4 0%, transparent 70%)",
+          animationDelay: "4s",
         }}
       />
 
-      <div className="relative z-10 max-w-5xl mx-auto text-center flex flex-col items-center">
+      <div className="relative max-w-4xl mx-auto text-center flex flex-col items-center">
         {/* Eyebrow */}
-        <div className="fade-up text-[11px] sm:text-[12px] tracking-[0.28em] uppercase text-[var(--ink-soft)]/70 font-medium mb-8">
+        <div className="fade-up inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-soft text-[12px] tracking-wide uppercase text-[var(--ink-soft)] font-medium mb-8">
+          <span className="w-1.5 h-1.5 rounded-full bg-[var(--gold)]" />
           A voice note · Not a course · $47
         </div>
 
-        {/* Headline — Zach's actual voice, with sky-blue gradient accent */}
-        <h1 className="display fade-up d1 text-[44px] sm:text-[72px] md:text-[88px] leading-[0.98] mb-7 max-w-[22ch] text-[var(--ink)]">
+        {/* Headline */}
+        <h1 className="display fade-up d1 text-[48px] sm:text-[68px] md:text-[80px] leading-[0.98] mb-6 max-w-[22ch]">
           A voice note to my younger self, <em>made public</em>.
         </h1>
 
         {/* Subhead */}
-        <p className="fade-up d2 text-[16px] sm:text-[18px] text-[var(--muted)] max-w-[56ch] leading-[1.6] mb-10">
-          Live monthly Q&amp;As with me. Ten short conversations. The
-          Starting Line Playbook. A door into the room with everyone else
-          figuring it out. That&apos;s the whole thing.
+        <p className="fade-up d2 text-[17px] sm:text-[19px] text-[var(--muted)] max-w-[58ch] leading-[1.55] mb-10">
+          Live monthly Q&As with me. Ten short conversations. The Starting Line Playbook.
+          A door into the room with everyone else figuring it out. That's the whole thing.
         </p>
 
-        {/* CTA row — ghost icon + arrow glass pill */}
-        <div className="fade-up d3 flex items-center gap-4 mb-14">
-          <a
-            href="#inside"
-            aria-label="See what's inside"
-            className="inline-flex items-center justify-center w-12 h-12 rounded-full border border-[var(--border-strong)] bg-white/60 text-[var(--ink-soft)] hover:bg-white/90 transition-colors"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
-              <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+        {/* VSL */}
+        <div className="fade-up d3 w-full max-w-3xl mx-auto mb-10">
+          <VSL />
+        </div>
+
+        {/* CTA row */}
+        <div className="fade-up d4 flex flex-col sm:flex-row items-center gap-3">
+          <a href={checkoutHref} className="btn-primary">
+            Get Zero to Six for $47
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
+              <path
+                d="M5 12h14M13 5l7 7-7 7"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
           </a>
-          <span className="text-[var(--muted-2)]">|</span>
-          <a href={checkoutHref} className="btn-arrow lg">
-            Get Zero to Six
-            <span className="arrow-circle">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
-                <path
-                  d="M5 12h14M13 5l7 7-7 7"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
+          <a href="#inside" className="btn-ghost">
+            See what's inside
           </a>
         </div>
 
-        {/* VSL — floating glass panel lit by the sky-blue halo behind it */}
-        <div className="fade-up d4 w-full max-w-3xl mx-auto">
-          <div
-            className="rounded-[22px] overflow-hidden relative"
-            style={{
-              boxShadow:
-                "0 1px 0 rgba(255, 255, 255, 1) inset, 0 60px 140px -30px rgba(111, 168, 222, 0.45), 0 24px 60px -16px rgba(17, 24, 39, 0.2)",
-            }}
-          >
-            <VSL />
+        {/* Micro-proof */}
+        <div className="fade-up d5 mt-8 flex items-center gap-4 text-[13px] text-[var(--muted)]">
+          <div className="flex -space-x-2">
+            {[0, 1, 2, 3].map((i) => (
+              <div
+                key={i}
+                className="w-7 h-7 rounded-full border-2 border-[var(--bg)]"
+                style={{
+                  background: `linear-gradient(135deg, ${
+                    ["#f4cfa1", "#cab6f0", "#a9c5f4", "#b8e0c4"][i]
+                  }, #ffffff)`,
+                }}
+              />
+            ))}
           </div>
-        </div>
-
-        {/* Scroll affordance */}
-        <div className="fade-up d5 mt-14 flex items-center gap-3 text-[11px] tracking-[0.22em] uppercase text-[var(--muted-2)]">
-          <span className="w-6 h-6 rounded-full border border-[var(--border-strong)] grid place-items-center">
-            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden>
-              <path d="M5 2v6M2 5l3 3 3-3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </span>
-          Scroll to Explore
+          <span>The room is full of other people figuring this out.</span>
         </div>
       </div>
     </section>

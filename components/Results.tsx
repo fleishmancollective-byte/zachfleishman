@@ -3,25 +3,25 @@ const pulls = [
     quote:
       "You can't become the person you want to be in the same environment that built the version of you you're trying to outgrow.",
     tag: "From Video 2 · Why I Left the Script",
-    accent: "#305282", // Ocean Steel
+    accent: "#cab6f0",
   },
   {
     quote:
       "The vehicle is not the lifestyle. The vehicle is the thing that compounds when nobody's looking.",
     tag: "From Video 3 · Picking a Vehicle",
-    accent: "#ffffff", // Cloud Mist
+    accent: "#f4cfa1",
   },
   {
     quote:
       "I didn't need more information. I needed to stop lying to myself.",
     tag: "From Video 5 · The Gap No One Warns You About",
-    accent: "#305282", // Ocean Steel
+    accent: "#a9c5f4",
   },
   {
     quote:
       "You are allowed to be selfish about this. Not toxic. Not cruel. Just selfish enough to put your own becoming above other people's comfort with the old version of you.",
     tag: "From Video 6 · The Hard Conversation",
-    accent: "#ffffff", // Cloud Mist
+    accent: "#b8e0c4",
   },
 ];
 
@@ -39,7 +39,7 @@ export default function Results() {
         </div>
 
         {/* Stat banner */}
-        <div className="animate-on-scroll liquid-border rounded-[var(--r)] py-8 px-6 sm:px-10 mb-12">
+        <div className="animate-on-scroll glass rounded-[var(--r)] py-8 px-6 sm:px-10 mb-12">
           <div className="grid sm:grid-cols-3 gap-6 sm:gap-10 text-center">
             {[
               { k: "Live", v: "Monthly Q&As with me, in the room" },
@@ -62,7 +62,7 @@ export default function Results() {
           {pulls.map((p) => (
             <figure
               key={p.tag}
-              className="animate-on-scroll liquid-border rounded-[var(--r2)] p-7 relative overflow-hidden"
+              className="animate-on-scroll glass-soft rounded-[var(--r2)] p-7 lift relative overflow-hidden"
             >
               <div
                 className="absolute -top-10 -right-10 w-40 h-40 rounded-full opacity-60"

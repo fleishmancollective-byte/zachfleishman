@@ -11,7 +11,7 @@ export default function CommunityIsland() {
   return (
     <div className="fixed bottom-5 right-5 z-40 max-w-[calc(100vw-2.5rem)]">
       {open ? (
-        <div className="liquid-border rounded-[18px] p-5 w-[300px] animate-[fadeUp_0.25s_ease-out]">
+        <div className="glass rounded-[18px] p-5 w-[300px] animate-[fadeUp_0.25s_ease-out]">
           <div className="flex items-start justify-between gap-3 mb-3">
             <div>
               <div className="text-[10.5px] tracking-[0.22em] uppercase text-[var(--muted-2)] mb-1">
@@ -41,7 +41,7 @@ export default function CommunityIsland() {
               className="w-7 h-7 rounded-full grid place-items-center shrink-0"
               style={{
                 background:
-                  "linear-gradient(135deg, #bfd8ee 0%, #6fa8de 50%, #4685c4 100%)",
+                  "linear-gradient(135deg, #f4cfa1 0%, #c9a063 100%)",
                 color: "#0b0d12",
               }}
             >
@@ -87,7 +87,7 @@ export default function CommunityIsland() {
           <span
             className="w-8 h-8 rounded-full grid place-items-center shrink-0"
             style={{
-              background: "linear-gradient(135deg, #bfd8ee 0%, #6fa8de 50%, #4685c4 100%)",
+              background: "linear-gradient(135deg, #f4cfa1 0%, #c9a063 100%)",
               color: "#0b0d12",
             }}
           >

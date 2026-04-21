@@ -36,10 +36,10 @@ export default function Story() {
           {beats.map((b) => (
             <div
               key={b.k}
-              className="animate-on-scroll liquid-border rounded-[var(--r)] p-6 sm:p-10 grid md:grid-cols-[110px_1fr] gap-5 md:gap-10 items-start"
+              className="animate-on-scroll glass rounded-[var(--r)] p-8 sm:p-10 lift grid md:grid-cols-[110px_1fr] gap-6 md:gap-10 items-start"
             >
               <div className="flex items-center gap-3 md:block">
-                <span className="display text-[54px] text-[var(--ocean)] leading-none">
+                <span className="display text-[54px] text-[var(--gold)] leading-none">
                   {b.k}
                 </span>
               </div>

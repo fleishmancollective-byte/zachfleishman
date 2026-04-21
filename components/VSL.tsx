@@ -40,7 +40,7 @@ export default function VSL() {
         className="absolute inset-0 opacity-40"
         style={{
           background:
-            "radial-gradient(ellipse at 70% 80%, rgba(48, 82, 130, 0.45) 0%, transparent 55%), radial-gradient(ellipse at 20% 90%, rgba(169, 197, 244, 0.3) 0%, transparent 60%)",
+            "radial-gradient(ellipse at 70% 80%, rgba(201, 160, 99, 0.45) 0%, transparent 55%), radial-gradient(ellipse at 20% 90%, rgba(169, 197, 244, 0.3) 0%, transparent 60%)",
         }}
       />
 

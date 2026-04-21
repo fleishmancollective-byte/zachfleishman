@@ -14,7 +14,7 @@ const brands = [
  */
 export default function LogoStrip() {
   return (
-    <section className="relative py-10 sm:py-14 px-6 border-y border-[var(--border)] bg-[rgba(255,255,255,0.03)] backdrop-blur-sm">
+    <section className="relative py-10 sm:py-14 px-6 border-y border-[var(--border)] bg-white/40 backdrop-blur-sm">
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center gap-6">
         <p className="text-[12px] tracking-[0.18em] uppercase text-[var(--muted)] shrink-0">
           As seen producing for
@@ -24,7 +24,7 @@ export default function LogoStrip() {
             {[...brands, ...brands].map((label, i) => (
               <span
                 key={i}
-                className="shrink-0 text-[18px] text-[var(--ink)] tracking-[-0.01em] font-semibold uppercase opacity-60 hover:opacity-100 transition-opacity"
+                className="shrink-0 text-[18px] text-[var(--ink-soft)] tracking-[-0.01em] font-semibold uppercase opacity-70 hover:opacity-100 transition-opacity"
                 style={{ letterSpacing: "0.02em" }}
               >
                 {label}

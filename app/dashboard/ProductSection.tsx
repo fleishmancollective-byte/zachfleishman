@@ -26,7 +26,7 @@ export default function ProductSection({
   const complete = totalTrackable > 0 && watchedCount === totalTrackable;
 
   return (
-    <section className="liquid-border rounded-[18px] overflow-hidden">
+    <section className="glass rounded-[18px] overflow-hidden">
       {/* Accordion header */}
       <button
         onClick={() => setOpen((o) => !o)}
@@ -41,7 +41,7 @@ export default function ProductSection({
                 className="ml-2 px-2 py-0.5 rounded-full text-[10px] tracking-[0.14em] font-semibold"
                 style={{
                   background:
-                    "linear-gradient(135deg, #bfd8ee 0%, #6fa8de 50%, #4685c4 100%)",
+                    "linear-gradient(135deg, #f4cfa1 0%, #c9a063 100%)",
                   color: "#0b0d12",
                 }}
               >
@@ -131,9 +131,9 @@ function ResourceRow({ resource }: { resource: Resource }) {
   const ready = Boolean(resource.href);
   return (
     <div
-      className={`flex items-start gap-4 px-4 sm:px-6 py-4 sm:py-5 rounded-[var(--r2)] liquid-border ${
-        ready ? "cursor-pointer" : ""
-      }`}
+      className={`flex items-start gap-4 px-5 sm:px-6 py-4 sm:py-5 rounded-[var(--r2)] border border-[var(--border)] bg-white/50 ${
+        ready ? "hover:bg-white/75 cursor-pointer" : ""
+      } transition-colors`}
       onClick={() => {
         if (resource.href) window.open(resource.href, "_blank", "noopener,noreferrer");
       }}
@@ -141,7 +141,7 @@ function ResourceRow({ resource }: { resource: Resource }) {
       <span
         className="shrink-0 mt-0.5 w-8 h-8 rounded-full grid place-items-center"
         style={{
-          background: "linear-gradient(135deg, #bfd8ee 0%, #6fa8de 50%, #4685c4 100%)",
+          background: "linear-gradient(135deg, #f4cfa1 0%, #c9a063 100%)",
           color: "#0b0d12",
         }}
       >

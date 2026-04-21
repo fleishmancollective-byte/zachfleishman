@@ -1,24 +1,16 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
-/**
- * Type system: Geist Sans, single variable family, weights 100–900.
- *
- * Display headlines pull a heavier weight (600–700); body sits at 400.
- * Italic is intentionally NOT loaded — the `<em>` editorial accent uses
- * weight + color instead of a slant. No cursive anywhere.
- *
- * Exposed as two CSS vars so globals.css can bind body and display
- * separately even though they resolve to the same family:
- *   --font-body      → body + UI
- *   --font-display   → .display / h1/h2/h3
- */
-
-const geist = Geist({
-  variable: "--font-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-  display: "swap",
+});
+
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const title = "Zero to Six · Zach Fleishman";
@@ -51,7 +43,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geist.variable} h-full antialiased`}>
+    <html lang="en" className={`${inter.variable} ${playfair.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
